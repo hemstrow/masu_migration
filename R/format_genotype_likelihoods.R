@@ -67,3 +67,10 @@ get_expected_counts <- function(genotypes, method = "af"){
   
   return(data.table::as.data.table(genotypes))
 }
+
+filter_expected_counts_maf <- function(dat){
+  af <- colSums(dat)/(2*nrow(dat))
+  low.af <- which(af < .1)
+  dat <- dat[,-..low.af]
+  return(dat)
+}
