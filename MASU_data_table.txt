@@ -1,0 +1,120 @@
+==========================================
+SLURM_JOB_ID = 30314571
+SLURM_NODELIST = c11-91
+==========================================
+Sample								Mapped		Properly Paired		Singletons
+SOMM99_BestRad_out_RA_GGAAACATCGTGCAG.sort.bam.samtools		96.28%		84.09%			1.12%		
+SOMM99_BestRad_out_RA_GGAACAACCATGCAG.sort.bam.samtools		96.33%		84.56%			1.10%		
+SOMM99_BestRad_out_RA_GGAACCGAGATGCAG.sort.bam.samtools		96.35%		84.61%			1.12%		
+SOMM99_BestRad_out_RA_GGAACGAACGTGCAG.sort.bam.samtools		96.42%		84.72%			1.07%		
+SOMM99_BestRad_out_RA_GGAACGCTTATGCAG.sort.bam.samtools		96.24%		84.41%			1.11%		
+SOMM99_BestRad_out_RA_GGAACGTGATTGCAG.sort.bam.samtools		96.40%		84.90%			1.06%		
+SOMM99_BestRad_out_RA_GGAAGACGGATGCAG.sort.bam.samtools		96.16%		84.52%			1.10%		
+SOMM99_BestRad_out_RA_GGAAGAGATCTGCAG.sort.bam.samtools		96.21%		84.33%			1.11%		
+SOMM99_BestRad_out_RA_GGAAGGACACTGCAG.sort.bam.samtools		96.08%		84.03%			1.15%		
+SOMM99_BestRad_out_RA_GGAAGGTACATGCAG.sort.bam.samtools		96.18%		84.18%			1.14%		
+SOMM99_BestRad_out_RA_GGAATCCGTCTGCAG.sort.bam.samtools		96.36%		84.53%			1.10%		
+SOMM99_BestRad_out_RA_GGAATGTTGCTGCAG.sort.bam.samtools		96.32%		84.73%			1.09%		
+SOMM99_BestRad_out_RA_GGACAAGCTATGCAG.sort.bam.samtools		96.22%		84.41%			1.09%		
+SOMM99_BestRad_out_RA_GGACACAGAATGCAG.sort.bam.samtools		96.33%		84.74%			1.07%		
+SOMM99_BestRad_out_RA_GGACACGAGATGCAG.sort.bam.samtools		96.40%		84.82%			1.06%		
+SOMM99_BestRad_out_RA_GGACACTGACTGCAG.sort.bam.samtools		96.12%		84.34%			1.11%		
+SOMM99_BestRad_out_RA_GGACAGATTCTGCAG.sort.bam.samtools		96.39%		84.68%			1.08%		
+SOMM99_BestRad_out_RA_GGACAGCAGATGCAG.sort.bam.samtools		96.03%		84.22%			1.12%		
+SOMM99_BestRad_out_RA_GGACATTGGCTGCAG.sort.bam.samtools		96.37%		84.73%			1.08%		
+SOMM99_BestRad_out_RA_GGACCACTGTTGCAG.sort.bam.samtools		96.21%		84.77%			1.06%		
+SOMM99_BestRad_out_RA_GGACCTCCAATGCAG.sort.bam.samtools		96.39%		85.14%			1.03%		
+SOMM99_BestRad_out_RA_GGACGACAAGTGCAG.sort.bam.samtools		96.30%		84.66%			1.09%		
+SOMM99_BestRad_out_RA_GGACGCTCGATGCAG.sort.bam.samtools		96.30%		84.62%			1.07%		
+SOMM99_BestRad_out_RA_GGACGTATCATGCAG.sort.bam.samtools		95.92%		83.76%			1.19%		
+SOMM99_BestRad_out_RA_GGACTATGCATGCAG.sort.bam.samtools		96.28%		84.60%			1.08%		
+SOMM99_BestRad_out_RA_GGAGAGTCAATGCAG.sort.bam.samtools		96.48%		84.99%			1.04%		
+SOMM99_BestRad_out_RA_GGAGATCGCATGCAG.sort.bam.samtools		96.32%		84.68%			1.07%		
+SOMM99_BestRad_out_RA_GGAGATGTACTGCAG.sort.bam.samtools		96.23%		84.41%			1.09%		
+SOMM99_BestRad_out_RA_GGAGCACCTCTGCAG.sort.bam.samtools		96.32%		84.34%			1.12%		
+SOMM99_BestRad_out_RA_GGAGCAGGAATGCAG.sort.bam.samtools		96.36%		84.35%			1.13%		
+SOMM99_BestRad_out_RA_GGAGCCATGCTGCAG.sort.bam.samtools		96.24%		84.23%			1.13%		
+SOMM99_BestRad_out_RA_GGAGGCTAACTGCAG.sort.bam.samtools		93.55%		70.31%			2.27%		
+SOMM99_BestRad_out_RA_GGAGTACAAGTGCAG.sort.bam.samtools		96.42%		84.81%			1.05%		
+SOMM99_BestRad_out_RA_GGAGTCAAGCTGCAG.sort.bam.samtools		96.28%		84.66%			1.09%		
+SOMM99_BestRad_out_RA_GGAGTCACTATGCAG.sort.bam.samtools		96.42%		84.73%			1.07%		
+SOMM99_BestRad_out_RA_GGAGTGGTCATGCAG.sort.bam.samtools		96.49%		84.81%			1.05%		
+SOMM99_BestRad_out_RA_GGATAGCGACTGCAG.sort.bam.samtools		96.08%		84.32%			1.11%		
+SOMM99_BestRad_out_RA_GGATCCTGTATGCAG.sort.bam.samtools		96.56%		85.08%			1.01%		
+SOMM99_BestRad_out_RA_GGATGCCTAATGCAG.sort.bam.samtools		96.13%		84.37%			1.08%		
+SOMM99_BestRad_out_RA_GGATTGAGGATGCAG.sort.bam.samtools		96.34%		84.85%			1.06%		
+SOMM99_BestRad_out_RA_GGATTGGCTCTGCAG.sort.bam.samtools		96.28%		84.68%			1.08%		
+SOMM99_BestRad_out_RA_GGCAACCACATGCAG.sort.bam.samtools		96.26%		84.72%			1.07%		
+SOMM99_BestRad_out_RA_GGCAAGACTATGCAG.sort.bam.samtools		96.39%		84.74%			1.07%		
+SOMM99_BestRad_out_RA_GGCAAGGAGCTGCAG.sort.bam.samtools		96.39%		84.89%			1.05%		
+SOMM99_BestRad_out_RA_GGCAATGGAATGCAG.sort.bam.samtools		96.52%		85.10%			1.03%		
+SOMM99_BestRad_out_RA_GGCACCTTACTGCAG.sort.bam.samtools		96.24%		84.94%			1.05%		
+SOMM99_BestRad_out_RA_GGCACTTCGATGCAG.sort.bam.samtools		96.41%		85.33%			1.02%		
+SOMM99_BestRad_out_RA_GGCAGATCTGTGCAG.sort.bam.samtools		96.11%		84.18%			1.10%		
+SOMM99_BestRad_out_RA_GGCAGCGTTATGCAG.sort.bam.samtools		85.20%		74.34%			1.03%		
+SOMM99_BestRad_out_RA_GGCATACCAATGCAG.sort.bam.samtools		96.58%		85.45%			1.00%		
+SOMM99_BestRad_out_RA_GGCATCAAGTTGCAG.sort.bam.samtools		18.96%		16.59%			0.32%		
+SOMM99_BestRad_out_RA_GGCCAGTTCATGCAG.sort.bam.samtools		96.27%		84.65%			1.09%		
+SOMM99_BestRad_out_RA_GGCCATCCTCTGCAG.sort.bam.samtools		96.37%		84.80%			1.08%		
+SOMM99_BestRad_out_RA_GGCCGAAGTATGCAG.sort.bam.samtools		96.27%		84.50%			1.09%		
+SOMM99_BestRad_out_RA_GGCCGACAACTGCAG.sort.bam.samtools		96.33%		84.75%			1.04%		
+SOMM99_BestRad_out_RA_GGCCGTGAGATGCAG.sort.bam.samtools		96.29%		84.51%			1.08%		
+SOMM99_BestRad_out_RA_GGCCTCCTGATGCAG.sort.bam.samtools		96.41%		85.26%			1.01%		
+SOMM99_BestRad_out_RA_GGCCTCTATCTGCAG.sort.bam.samtools		96.41%		84.95%			1.05%		
+SOMM99_BestRad_out_RA_GGCGAACTTATGCAG.sort.bam.samtools		96.43%		84.60%			1.08%		
+SOMM99_BestRad_out_RA_GGCGACACACTGCAG.sort.bam.samtools		96.36%		84.53%			1.12%		
+SOMM99_BestRad_out_RA_GGCGACTGGATGCAG.sort.bam.samtools		96.38%		84.53%			1.10%		
+SOMM99_BestRad_out_RA_GGCGCATACATGCAG.sort.bam.samtools		96.20%		84.51%			1.11%		
+SOMM99_BestRad_out_RA_GGCGCTGATCTGCAG.sort.bam.samtools		96.49%		84.84%			1.05%		
+SOMM99_BestRad_out_RA_GGCGGATTGCTGCAG.sort.bam.samtools		96.06%		84.07%			1.15%		
+SOMM99_BestRad_out_RA_GGCTAAGGTCTGCAG.sort.bam.samtools		96.08%		84.10%			1.14%		
+SOMM99_BestRad_out_RA_GGCTCAATGATGCAG.sort.bam.samtools		96.41%		84.92%			1.05%		
+SOMM99_BestRad_out_RA_GGCTGAGCCATGCAG.sort.bam.samtools		96.48%		84.89%			1.07%		
+SOMM99_BestRad_out_RA_GGCTGGCATATGCAG.sort.bam.samtools		96.19%		84.52%			1.08%		
+SOMM99_BestRad_out_RA_GGGAACAGGCTGCAG.sort.bam.samtools		96.41%		84.59%			1.10%		
+SOMM99_BestRad_out_RA_GGGAATCTGATGCAG.sort.bam.samtools		96.40%		84.77%			1.08%		
+SOMM99_BestRad_out_RA_GGGACAGTGCTGCAG.sort.bam.samtools		96.34%		84.58%			1.09%		
+SOMM99_BestRad_out_RA_GGGACTAGTATGCAG.sort.bam.samtools		96.37%		84.68%			1.08%		
+SOMM99_BestRad_out_RA_GGGAGCTGAATGCAG.sort.bam.samtools		96.52%		84.92%			1.04%		
+SOMM99_BestRad_out_RA_GGGAGTTAGCTGCAG.sort.bam.samtools		96.04%		84.27%			1.12%		
+SOMM99_BestRad_out_RA_GGGATAGACATGCAG.sort.bam.samtools		96.31%		84.45%			1.11%		
+SOMM99_BestRad_out_RA_GGGATGAATCTGCAG.sort.bam.samtools		96.33%		84.64%			1.08%		
+SOMM99_BestRad_out_RA_GGGCCAAGACTGCAG.sort.bam.samtools		96.21%		84.67%			1.08%		
+SOMM99_BestRad_out_RA_GGGCCACATATGCAG.sort.bam.samtools		96.40%		84.85%			1.06%		
+SOMM99_BestRad_out_RA_GGGCGAGTAATGCAG.sort.bam.samtools		96.13%		84.27%			1.12%		
+SOMM99_BestRad_out_RA_GGGCTAACGATGCAG.sort.bam.samtools		96.36%		84.89%			1.04%		
+SOMM99_BestRad_out_RA_GGGCTCGGTATGCAG.sort.bam.samtools		96.45%		84.76%			1.07%		
+SOMM99_BestRad_out_RA_GGGGAGAACATGCAG.sort.bam.samtools		96.36%		84.87%			1.05%		
+SOMM99_BestRad_out_RA_GGGGTGCGAATGCAG.sort.bam.samtools		96.26%		84.80%			1.06%		
+SOMM99_BestRad_out_RA_GGGTACGCAATGCAG.sort.bam.samtools		96.29%		84.85%			1.07%		
+SOMM99_BestRad_out_RA_GGGTCGTAGATGCAG.sort.bam.samtools		96.10%		84.52%			1.08%		
+SOMM99_BestRad_out_RA_GGGTCTGTCATGCAG.sort.bam.samtools		96.46%		85.02%			1.03%		
+SOMM99_BestRad_out_RA_GGGTGTTCTATGCAG.sort.bam.samtools		96.30%		84.93%			1.07%		
+SOMM99_BestRad_out_RA_GGTAGGATGATGCAG.sort.bam.samtools		96.35%		85.29%			1.02%		
+SOMM99_BestRad_out_RA_GGTATCAGCATGCAG.sort.bam.samtools		96.40%		85.17%			1.05%		
+SOMM99_BestRad_out_RA_GGTCCGTCTATGCAG.sort.bam.samtools		96.41%		85.38%			1.00%		
+SOMM99_BestRad_out_RA_GGTCTTCACATGCAG.sort.bam.samtools		96.51%		85.65%			0.96%		
+SOMM99_BestRad_out_RA_GGTGAAGAGATGCAG.sort.bam.samtools		96.41%		85.27%			1.01%		
+SOMM99_BestRad_out_RA_GGTGGAACAATGCAG.sort.bam.samtools		96.35%		85.18%			1.04%		
+SOMM99_BestRad_out_RA_GGTGGCTTCATGCAG.sort.bam.samtools		96.48%		85.17%			1.02%		
+SOMM99_BestRad_out_RA_GGTGGTGGTATGCAG.sort.bam.samtools		96.21%		85.21%			1.02%		
+SOMM99_BestRad_out_RA_GGTTCACGCATGCAG.sort.bam.samtools		95.96%		79.98%			1.33%		
+Name                : data_script
+User                : wolfie12
+Partition           : med
+Nodes               : c11-91
+Cores               : 8
+GPUs                : 0
+State               : COMPLETED
+Submit              : 2021-02-08T16:27:23
+Start               : 2021-02-08T16:27:32
+End                 : 2021-02-08T16:27:37
+Reserved walltime   : 4-12:00:00
+Used walltime       :   00:00:05
+Used CPU time       : --
+% User (Computation): --
+% System (I/O)      : --
+Mem reserved        : 20G/node
+Max Mem used        : 0.00  (c11-91)
+Max Disk Write      : 0.00  (c11-91)
+Max Disk Read       : 0.00  (c11-91)
