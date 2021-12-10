@@ -1,0 +1,157 @@
+---
+title: "paper_I_methods_comparison"
+author: "William Hemstrom"
+date: "11/21/2021"
+output:
+  word_document:
+    reference_docx: "style_ref.docx"
+  pdf_document:
+    keep_tex: true
+    fig_caption: true
+    latex_engine: pdflatex
+    fig_width: 7
+    fig_height: 6
+bibliography: "citations.bib"
+csl: "council-of-science-editors-author-date.csl"
+header-includes:
+  - \usepackage[left]{lineno}
+  - \linenumbers
+  - \usepackage{setspace}\doublespacing
+  - \usepackage{sectsty}\sectionfont{\fontsize{12}{12}\selectfont}
+  - \usepackage{sectsty}\subsectionfont{\normalfont\itshape\fontsize{12}{12}\selectfont}
+  - \usepackage[round]{natbib}
+indent: true
+sansfont: Times New Roman
+fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2);library(GeneArchEst); library(RefManageR); library(snpR)
+bib <- ReadBib("citations.bib")
+```
+
+# Abstract:
+
+
+# Introduction:
+
+<!-- - Can put some of the background info into the results as an additional results paragraph. -->
+
+Given that the rapid rate of global, human induced environmental change is driving an ongoing "sixth mass extinction" [@Gerardo2021], there is a dire need for conservationists to estimate how selective pressures caused by environmental change are likely to impact the species they study over the coming decades. The ability of a population to persist in the face of environmental change depends, essentially, on two factors: the rate of environmental change and genetics of the traits under selection [@Lynch1993]. An understanding of the genetic structure of phenotypic variation is therefore a critical component of any attempt to forecast demographic outcomes for populations in changing environments [@Ellegren2008; @Wilson2010].
+
+While methodologies to incorporate genetic data into demographic models have existed for a while now [see @Burger1995 or @Chevin2010, for example], our massively expanded access high resolution sequencing offers us the opportunity to make much more informed demographic predictions that incorporate far more information about the genetics of a trait under selection. This has led to the development of the *genomic vulnerability* framework, which harnesses genomic data from individuals across varied landscapes to explore how genetic variance correlates with environmental conditions [@Fitzpatrick2015]. This data can then be used in conjunction with climate forecasting to quantify the vulnerability of populations to predicted environmental changes [@Fitzpatrick2015; @Bay2018]. Outlier or association studies, such as Bay et al. [-@Bay2017], expand on this framework by using variation associated with specific environmental variables to directly forecast population demographics.
+
+However, the actual power of these methods to accurately estimate demographic trajectories during adaptation have not been assessed. In order to determine the actual utility of these approaches for genetic risk assessment and demographic forecasting, we need to know how reasonable their predictions are and quantify any bias they tend to include. *Here, we use simulation to generate a known demographic outcome for a population with a known genetic architecture for a trait under selection. We then compare these results to forecasted demographic outcomes produced by using association testing and other approaches to integrate genetic data into demographic models in order to validate the validity of those models.*
+
+# Results:
+
+## Demographic Simulations with a Known Genetic Architecture:
+
+In order to evaluate the power of GP, GWAS, and RF for generating forecasts of demographic outcomes during selective processes, we first simulated demographic outcomes for populations under selection for a trait with several different known genetic architectures. To do so, we first simulated genomic data for 500 individuals using a coalescent approach [@Staab2015], then sampled locus effect sizes off of a BayesB distribution [@Meuwissen2001], derived phenotypes for individuals following the animal model assuming a normally distributed environmental effect ($h^2$ = 0.5), and then simulated survival and growth under constant, directional change in the phenotypic optimum according to Bürger and Lynch [-@Burger1995]. We tracked population size and genetic variance ($\sigma_{g}^{2}$) in each population during each generation of the simulation. We repeated this process 100 times for each architecture in order to explore the range of demographic outcomes in each case. We used this procedure to test four different genetic architectures: one with 30 causal loci/sites, one with 100, one with 300, and one in which all loci had an effect on phenotype (hereafter the BayesA architecture). In each case, we tuned the demographic and selection parameters to ensure that populations went extinct in roughly 150 generations. 
+
+We then constructed a 95% prediction interval for time-to-extinction for each architecture. These intervals were slightly wider for the 30 sites data, but were similar overall (Figure X). The overall demographic patterns were also similar: in each case, population size remained near the carrying capacity for the majority of the simulation, then abruptly crashed. $\sigma_{g}^{2}$ declined at a steady rate throughout the simulation, nearing zero at approximately the same time the population went extinct.
+
+
+## Demographic Forecasting using genomics:
+
+
+To evaluate the ability of existing methods to predict the demographic outcomes that we observed with our simulated data, we tested two different types of methodologies for predicting the genetic architecture of a trait: 1) causal loci identification or 2) phenotype prediction via the joint distribution of all loci simultaneously. The causal loci identification is typified by Genome Wide Association Studies (GWAS), which are widely used to identify loci associated with phenotypic variance at a specific trait [@Visscher2017]. Over the last 15 or so years, GWAS approaches have been adopted incredibly broadly broadly and are used to answer a huge range of medical, evolutionary, and ecological questions [@Visscher2017; @Visscher2012]. Today, GWAS is arguably the standard approach to causal loci identification.
+
+In contrast, prediction via the joint distribution of all loci is typically done via Genomic Prediction (GP) or Random Forest (RF) approaches. These methods jointly consider all loci, even those with very little or no effect, in order to maximize phenotypic prediction accuracy for a given trait [@DelosCampos2013; @Meuwissen2001]. GP models have been used primarily in the agricultural and animal science fields, but have also seen some use in an ecological context [CITE]. RF, a Machine Learning method which has been increasingly used for ecological genetics and association studies [@Lunetta2004; @Molinaro2011; @Bay2018; @Goldstein2011; @Meng2009], approaches prediction similarly by considering the joint effect of all sequenced loci, although it by bypasses the model construction step by using algorithmically derived models without direct human involvement in order to maximize prediction accuracy.
+
+To generate demographic forecasts from GWAS candidate loci identification, we ran a GWAS using each set of phenotypes and selected all loci for $p \leq 0.05$ in each case. We then used just these phenotypes to construct a basic multiple linear regression against phenotype. We then ran the demographic simulations as before, but used the animal model to predicting phenotypes each generation, where $G$ was predicted for each individual by prediction off of this regression.
+
+We found that this approach was mostly unable to generate realistic estimates of time-to-extinction. In each test architecture, GWAS predicted a significantly more rapid time-to-extinction than observed in the control data. This problem became more severe as the number of causal loci increased, with overlap in the time-to-extinction prediction interval _only_ with 30 causal loci (Figure X). The demographic patterns and changes in $\sigma_{g}^{2}$ were quite similar to those in the control data, however, with a constant population size followed by an abrupt crash and a constant decline, respectively. Interestingly, we observed several distinctly different demographic trajectories in both the 30 sites and 100 sites outcomes with were observed repeatedly across the different simulations.
+
+For these GP and RF, we generated demographic forecasts from GP and RF by predicting $G$ for each individual using the respective model in each generation. Like GWAS, neither GP nor RF approach was able to generate reasonable estimates for time-to-extinction: in each case and for each test architecture, time-to-extinction estimates were much lower than in the control data (Figure X). Critically, these approaches both predicted an immediate, dramatic drop in $\sigma_{g}^{2}$ in all test architectures (Figure X). We observed this decline even if chromosomes were randomly shuffled between individuals without recombination in the absence of selection.
+
+As an alternative approach, we also drew BayesB hyperparameters [@Meuwissen2001] from the posterior distribution produced by GP and then sampled phenotypes as with the control data. Since a single hyperparameter draw can produce a wide range of actual architectures due to placing effects on loci with different minor allele frequencies, we filtered the resulting phenotypic distributions by taking only those that were similar to the control phenotypic distribution. The prediction intervals for time-to-extinction from this approach partially overlapped the control data for all architectures other than the BayesA architecture, but still consistently underestimated the true time-to-extinction (Figure X). $\sigma_{g}^{2}$ estimates were followed a more similar tragectory to the control data, but were highly variable (Figure X).
+
+## Demographic Forecasting using Quantitative Genetics:
+
+In addition to the genomic methods above, we also conducted demographic forecasting using a quantitative genetics model which relies only on the heritability of a trait, not on genomic data or any kind of genetic architecture estimate [@Burger1995]. This model (hereafter BL) predicted population persistence for all architectures other than 300 sites, for which the time-to-extinction was considerably underestimated (Figure X).
+
+# Discussion:
+
+## Demographic Forecasting with Genomics:
+
+Prior to conducting this study, we hypothesized that a GWAS candidate-loci based approach to genetic architecture estimation would result in consistent underestimates of time-to-extinction that worsen as the true number of effect loci increase. We reasoned that this would occur due to GWAS’s difficulty with detecting rare causal alleles, those with small effect sizes, or both [@Maher2008; @Nolte2017; @Visscher2017]. As a result, GWAS studies should typically underestimate the number of causal loci and overestimate the average effect sizes of those it does detect. Since populations with few loci of strong effect should have strong initial responses to selection but less longevity as variance is exhausted as environmental change continues [@Kardos2021], GWAS should as a result underestimate time-to-extinction. 
+
+This is exactly what our simulations demonstrated: under the GWAS model, there are fewer loci with effects, each of which has a much larger effect on average than in the real data (Figure X). As a result, population sizes do not initially change in size at all, since the strong response in the underlying mean additive genetic component of phenotype is able to easily match pace with the rate of environmental change (X). This was followed in a sharp decline $\sigma_{g}^{2}$ in the population declines rapidly (Figure X), which is accompanied shortly thereafter by a precipitous decline in population size (Figure X). Interestingly, we observed that GWAS predicted several distinctly different possible demographic outcomes when the number of causal loci was low (30 or 100 sites) that mirrored similar trends in the control data. In each case, these patterns was caused by the stochastic loss of major effect loci due to genetic drift during the early period of the simulation, which resulted in a reduced ability to respond as selection pressures increased.
+
+In contrast, we initially expected GP or RF approaches to overestimate time-to-extinction, which very clearly did not happen. These approaches both jointly consider all loci in order to predict individual BVs. Due to linkage, we expected that this would result in the attribution of effect to too many loci, and the spreading out of the size of the effect amongst these loci, resulting in an overestimation of the number of effective loci and an underestimation of the size of their average genomic effects. This would result in a slower initial response to selection, but a more sustained response over time and thus a longer average time-to-extinction [@Kardos2021]. While GP did indeed predict more loci of smaller effect (Figure X), both GP and RF predicted a slow initial response, but then an extremely quick decline in population size (Figure X). This rapid decline was caused in both cases by an immediate and pronounced decline in genetic variance (Figure X). 
+	
+Unlike declines in the other models, the variance declines for GP and RF were not caused by selection or drift, since reshuffling chromosomes between individuals without replacement caused a similar decline in estimated variance. While the reason for this is unclear, it likely relates to the spreading of effect estimates across linked loci, even those that are not physically linked. Breaking these linkages up by reshuffling may cause a loss in genetic variance by spreading effects away from the effect “peaks” present in the initial estimates and thus causing all subsequent individuals to have more similar genomic compositions. The same issue may explain the decline of variance in RF derived estimates as well. Regardless, it is clear that estimating the effects (or importance) of individual effects in GP and RF result in less accurate demographic estimates. Unsurprisingly, then, drawing architectures from the hyperparameter posteriors of a GP estimation did produce marginally better estimates without the sharp decline in genetic variance, although the posterior very clearly overestimated the number of effective loci and underestimated their average effect size (Figure X).
+
+## Demographic Forecasting with Classical Quantitative Genetics:
+
+Given the poor performance of the GWAS, GP, and RF approaches to demographic forecasting, we also attempted to use a quantitative genetic approach to forecast demographic outcomes without success. Bürger and Lynch's [-@Burger1995] method did not predict extinction during the 250 generations that we simulated for most architectures. This is not a particularly surprising result given the structure of the BL model and of quantitative genetics models in general. 
+
+Most quantitative genetics models are based on the “animal” model, which offers a straightforward way to incorporate genetic information into evolutionary and ecological models by modeling individual phenotypes (P) as the sum of the genetic (G) and environmental factors (E) which influence that trait [@Falconer1996]: 
+$$\begin{eqnarray} P = G + E \end{eqnarray}$$ 
+The breeder’s equation is perhaps the most natural way to apply the animal model to predict phenotypic responses to selection:
+$$ \begin{eqnarray} R &=& h^{2}S \\ h^{2} &=& \frac{\sigma_{g}^{2}}{\sigma_{p}^{2}} \end{eqnarray}$$
+where the per-generation response to selection ($R$) is a simple product of the strength of selection ($S$) and the ratio between the additive, or directly heritable, genetic ($\sigma_{g}^{2}$) and phenotypic ($\sigma_{p}^{2}$) variance [together narrow-sense heritability, or $h^{2}$, see @Lush1943]. However, this equation does not always perform well in wild populations [@Morrissey2010].  
+
+While the animal model and its direct derivations have seen extensive use in both agricultural and ecological settings to model selection, both artificial and natural [@Germain2016; @Kostick2021; @Krist2021; @Pettersen2018; @Zhao2015], more complex derivations are potentially more useful for modeling population responses to selection specifically. The BL model sits in this category alongside a set of others which use $h^2$ and a set of biological and demographic parameters to predict population persistence during environmental change [@Burger1995, @Chevin2010; @Gomulkiewicz2009; @Lynch1993; @Osmond2017]. These models [specifically the BL model and @Lynch1993's very similar model] have been recently implemented to estimate the critical rates of environmental change for hatching dates in *Parus major* [@Gienapp2013], and thermal stress in *Drosophila birchii* [@Willi2009]. 
+
+However, as we have shown here, these models may not always perform well. They have two core issues: first, they only include genetic information in the form of a $h^2$ estimate. Given that the details of genomic architecture should produce markedly different biological outcomes, even when heritability is identical [@Chevalet1994; @Walsh2003; @Walsh2018], they may produce misleading estimates for some populations. In our case, however, the problem is likely that these models assume an infinitesimal model of genetic variation, under which selection does not change the underlying genetic variation for a trait [@Fisher1919; @Robertson1960], which is unlikely to be a reasonable approximation unless a trait is incredibly polygenic.
+
+They therefore allow for the indefinite maintenance of genetic variance ($\sigma_{g}^{2}$) during selection, since the removal of alleles due to selection does not result in a reduction of $\sigma_{g}^{2}$ if there are infinite possible alleles that contribute to a given trait [@Lynch1993; @Burger1995]. A population's core ability to respond to selection therefore stay consistent over time, and populations go extinct only due to stochastic processes or if the constant lag between the population's mean phenotype and the population optimum is too large [@Burger1995; @Lynch1993]. They cannot simply run out of genetic variation as they hit physiological limits or reach a maximum possible phenotype determined by the initial standing genetic variation. 
+
+In contrast, in a real-world population where the number of causal loci for every trait is finite, $\sigma_{g}^{2}$ will decline as selection purges unfit alleles unless mutation can generate new variance apace. In our simulations, we see this clearly: $\sigma_{g}^{2}$ declines over time due to selection for our observed results and for our models which incorporate more genetic information. It is therefore not surprising that the BL model overestimated the capacity of our population to respond to selection over successive generations.  
+
+Unfortunately, our results are likely generalizable, since the infinitesimal model is likely to be unreasonable for most populations of conservation concern. For the model to be a close approximation, mutation (or other processes that introduce genetic variation) must resupply enough adaptive genetic variation in order to maintain a population's adaptive capacity. Specifically, this means that a mutation needs to supply causal variants which help extend a phenotype beyond the previous maximum or minimum as selection fixes variants that previously contributed to one tail of the phenotypic distribution. For populations experiencing rapid changes to their environment, as is often the case populations of concern, this may simply not be possible, and thus the infinitesimal model is likely to underestimate demographic impacts over time, as it did here.
+
+## Conclusion:
+
+Ultimately, since the infinitesimal model is not realistic for virtually any trait in any population, classical quantitative genetics approaches to demographic forecasting are not likely to produce reasonable estimations of demographic outcomes for populations of conservation concern. To remedy this, more genetic information must be incorporated into demographic models if reasonably accurate predictions are desired. However, it is clear that neither the causal loci focused GWAS approach or joint-site phenotype prediction focused GP and RF approaches produce reasonable forecasts, since the former approach will tend to miss the potentially important contributions of loci will small effects to a population's adaptive capacity and the latter have some intrinsic issues which cause them to erroneously predict a drastic decline in genetic variance in subsequent generations. New methods, such as True Genomic Architecture Computation (TGAC, see Hemstrom et al. 2022), may help sidestep the problems with these approaches.
+
+# Methods:
+
+## Genotype and Phenotype Simulation:
+
+We produced simulated genotype data for 500 whole genome datasets using the program scrm [@Staab2015] assuming ten 10mb long chromosomes, a effective population size ($N_{e}$) of 1000, a recombination rate ($\rho$) of $2x10^{-8}$ per base, and a mutation rate ($\mu$) of $1x10^{-8}$ per base. We then simulated two sets of phenotypes by applying modified BayesB distributions, where the parameter $\pi$, which denotes the probability that a locus has no effect on phenotype was substituted for the parameter *sites*, which denotes the exact number of loci with an effect. By making this change, we ensured that we knew exactly how many sites had an effect on phenotype for each of our simulations. Phenotypes *P* for each individual *i* were determined using the animal model summing across each *j* allele:
+$$ \begin{eqnarray} P_{i} &=& G_{i} + E_{i} \\ G_{i} &=& \sum_{i=1}^{n}\sum_{j=1}^{2} p_{i,j}a_{j} \\ E_{i} &\sim& N(0,\sigma_{e}) \\ \sigma_{e} &=& \sqrt{\frac{\sigma_{g}^{2}}{h^{2}} - \sigma_{g}^{2}} \end{eqnarray}$$
+where *G* is the additive genetic component of phenotype, *E* is the environmental component, $p_{i,j}$ is the count of the allele *j* in individual *i*, $a_{j}$ is the effect of allele *j*,  $\sigma_{e}^{2}$ is the variance of the environmental effects, $\sigma_{g}^{2}$ is the variance of the genetic effects, and $h^{2}$ is the narrow-sense heritability.
+
+We created three sets of phenotypes with $sites =$ 30, 100, or 300, $s =$ 1, $h^{2} =$ 0.5, and $df =$ 5. We simulated one additional set of phenotypes using a BayesA distribution, which like, BayesB, draws effects from a scaled *t*-distribution with scale *s*, but assumes that all loci have an effect [equivalent to a *sites* value equal to the number of segregating sites in the genome, see @Meuwissen2001]. 
+
+## Demographic Simulations with a Known Architecture:
+
+We simulated demographic responses to selection with all four test architectures. We used a demographic model similar to that proposed by  Bürger & Lynch [-@Burger1995]. In this model, the optimum phenotype $\theta$ increases each generation *t* linearly by *k*, but varies stochastically each generation following a normal distribution with a standard deviation of $\sigma_{\theta}$:
+\begin{eqnarray} &\sigma_{t} = \sigma_{t-1} + k + x_{t} \\ &x_{t} \sim N(0, \sigma_{\theta}^{2})\end{eqnarray}
+The probability that individual *i* survives generation *t* ($s_{i,t}$) is determined by their phenotype $P_{i}$, the selection optimum in that generation $\theta_{t}$, and the strength of selection $\omega$:
+$$ \begin{eqnarray} s_{i,t} = e^{-\frac{(p_{i} - \theta_{t})^{2}} {2\omega^{2}}} \end{eqnarray} $$
+We incorporated density dependence by randomly culling individuals down to *K* survivors after each generation. 
+Surviving individuals were then assigned a sex at random and randomly mated to reproduce to $N\beta$ surviving offspring, where *N* is the number of survivors and $\beta$ is the average number of offspring per surviving individual. We allowed chromosomes to recombine by randomly placing *r* recombination events, where *r* was determined using a Poisson distribution with $\lambda$ = 1, for a mean of one recombination event per chromosome per generation. We chose this value of $\lambda$ to match the value of $\rho$ used during the initial coalescent simulations used to generate the test genomes.
+
+Individual phenotypes were calculated as above in each generation and subjected to selection. We assumed that narrow-sense heritability was equal to broad-sense heritability, and that the scale of the environmental effects on phenotype did not change over time. Heritability, therefore, could change if the amount of population genetic variance changed across generations. If N was ever < 2 or all survivors were of one sex, the population was considered to have gone extinct. We modeled the population without any overlap in generations. We tracked the population size *N* and the population genetic variance $\sigma_{g}^{2}$ in each generation until extinction. In each case, *K* was set to 250 and $\beta$ to 2, such that the populations would return to 500 individuals (the initial number of simulated genomes) if culled to *K* without selection. The other demographic and selection parameters were tuned for each test architecture such that the population went extinct in roughly 150 generations (see Table SX). In order to determine the range of possible demographic outcomes for each architecture, we ran the simulation 100 times for each and calculated 95% prediction intervals for time-to-extinction.
+
+
+## Forecasting with Genomics:
+
+Since real whole-genome data is essentially never complete, we first a reasonable amount of missing genotype data. We added missing data to our genotypic data by drawing a probability of missing data at each locus from a normal distribution of mean 0.05, sd = 0.2, such that each locus had a different probability of having missing data. Missing data was then added by a binomial draw at each genotype based on the locus-specific missing data probability. We then imputed missing genotypes using the Beagle software package [@Browning2007] without using a reference panel. We repeated this process for each test architecture.
+
+We then conducted a GWAS model using a relatedness-corrected association test using the GMMAT R package [@Chen2016]. To identify candidate loci, selected all SNPs where $p \leq 1x10^{-5}$. We then conducted demographic simulations as above for each of the four test architectures using the same parameters, although the genetic component of each individual phenotype, *G*, was determined by predicting off a multiple linear regression model fit with genotypes at at each of our selected SNPs as the explanatory variables instead of by reference to the known locus effect sizes. In each generation, $\sigma_{g}^{2}$ was calculated using these *G* values. We repeated this procedure 100 times to determine the range of possible predicted demographic outcomes and calculated 95% prediction intervals for time-to-extinction, as before.
+
+For both GP and RF, we first added missing data as in GWAS, then fit the respective model to the observed phenotypes for each of the four test architectures. For GP, we used the BGLR R package [@Perez2014] assuming a BayesB effect size distribution to fit a genomic prediction model using 1,000 burn-in and fit 10,000 iterations. For RF, we used the ranger R package [@Wright2017] with 500 trees and an *mtry* equal to the number of loci. Using more iterations or trees did not seem to improve model fit. In each case, we fit a basic model with phenotype as the response and the genotypes as the explanatory variables without covariates.
+
+We then ran the demographic simulations as before, using the same parameters as the control data. *G* was predicted for each individual in each generation by predicting off of the model using their genotype data. As before, $\sigma_{g}^{2}$ was calculated using these *G* values. We ran each simulation 100 times and calculated 95% prediction intervals as before.
+
+As an additional test, we also conducted demographic forecasting using the posterior BayesB hyper-parameter distribution generated by the genomic prediction model. We then used these parameters to generate allele effect sizes and simulate demographic outcomes as we did with the real data. We repeated this step 1,000 times. However, since a single set of BayesB hyper-parameters can theoretically produce very different architectures if large effects are placed on common vs. rare alleles by chance, we filtered the resulting phenotypic distributions to find those that were reasonable matches by calculating a two-way Kolmogorov-Smirnov statistic comparing the initial control phenotypic distribution (before selection and random mating) to the predicted initial phenotypic distribution [@Conover1998], and took only the top 10% (resulting in 100 predicted demographic outcomes, as for each other approach).
+
+## Demographic Forecasting with Classical Quantitative Genetics:
+
+We also used Bürger and Lynch [@Burger1995]'s methods to forecast demographic outcomes for each of our test architectures. We followed Bürger and Lynch [@Burger1995]'s (denoted BL below) equations to directly iterate across time using the following steps:
+
+1. Use BL equation 7a to determine the expected mean phenotype in this generation ($E[\bar{g}_{t}]$).
+2. Use BL equation 7b to determine the variance of the mean phenotype in this generation ($V[\bar{g}_{t}]$).
+3. Use $E[\bar{g}_{t}]$ and $V[\bar{g}_{t}]$ alongside BL equations 13, and 9 to determine $\lambda{t}$, the population growth rate for this generation.
+4. Determine the number of individuals in the next generation ($N_{t+1}$) using the equation $N_{t+1} = \lambda_{t}N_{t}$, where $N_{t}$ is the number of individuals in this generation. If $N_{t+1}$ was less than two, the population was considered to have gone extinct.
+5. If at any point $N_{t} = N_{t+1}$, the demographic and selection pressures were considered not strong enough to cause extinction.
+
+In each case, we allowed the selection intensity to change and parameterized the demographic and selection parameters as we did for the known architecture simulations.
+
+# References:
