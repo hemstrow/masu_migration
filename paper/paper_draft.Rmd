@@ -24,6 +24,9 @@ indent: true
 sansfont: Times New Roman
 fontsize: 12pt
 ---
+
+#Introduction 
+MASU salmon have two different types of lifestyles which include either being anadromous or resident. 
 ```{r, echo=FALSE, include=FALSE}
 dat<-read.table("../data/genotypes.geno")                        
 meta<- read.table("../data/sample_meta.txt", header=TRUE)
@@ -38,23 +41,15 @@ number_snps_after_filtering <- nsnps(dat)
 dat <- calc_ho(dat, c("pop", "phen", "pop.phen"))
 get.snpR.stats(dat, c("phen", "pop","pop.phen"), stats="ho") $weighted.means
 get.snpR.stats(dat, c("pop", "phen", "pop.phen"))
-dat <- calc_pi(dat, c("pop"))
+dat <- calc_fis(dat, c("pop", "phen"))
+dat <- calc_pi(dat, c("pop", "phen"))
 get.snpR.stats(dat, c("pop"), stats="pi") $weighted.means
-get.snpR.stats(dat, "pop")
-dat <- calc_het_hom_ratio(dat, c("pop", "phen", "pop.phen"))
-get.snpR.stats(dat, c("pop", "phen", "pop.phen"))
-dat <- calc_maf(dat, c("pop"))
-get.snpR.stats(dat, c("pop"))
-p <- plot_clusters(dat, facets = c("pop.phen"), plot_type = "umap")
 dat <- calc_private(dat, c("phen", "pop","pop.phen"))
 get.snpR.stats(dat, c("pop"), stats="private") $weighted.means
 get.snpR.stats(dat, c("pop", "phen", "pop.phen"))
 dat <- calc_pairwise_fst(dat, c("phen", "pop","pop.phen"), boot = 100, boot_par = 2)
 get.snpR.stats(dat, c("phen", "pop","pop.phen"), stats="fst") $weighted.means
-fts <- dat[[2]]
-dat <- dat[[1]]
-stats <- get.snpR.stats(dat, "pop.phen", type = "pairwise")
-head(stats)
+get.snpR.stats(dat, c("pop", "phen"), stats= c("ho", "pi", "fst")) $weighted.means
 
 gp<- run_genomic_prediction(dat, response = "phen", iterations = 10000, burn_in = 1000, thin = 100)
 library(data.table)
@@ -102,51 +97,37 @@ dcombine <- as.data.frame(dcombine)
 dcombine$pop <- pca$pop
 dcombine$phen <- pca$phen
 colnames(dcombine)[1:2] <- c("CH", "TK")
-# ggplot(dcombine, aes(x=pop, y=d, color=phen)) + geom_boxplot() + theme_bw()
 dcombine$phen <- factor(dcombine$phen)
 dcombine$pop <- factor(dcombine$pop)
-mod <- aov(TK~pop+phen+pop*phen, dcombine)
 dcombine$d <- 0
 dcombine$d[dcombine$pop=="CH"] <- dcombine$TK[dcombine$pop=="CH"]
 dcombine$d[dcombine$pop=="TK"] <- dcombine$CH[dcombine$pop=="TK"]
-mod <- aov(d~phen+pop+pop*phen, dcombine[-32,])
-mod2 <- aov(d~phen, dcombine[-32,])
-anova(mod, mod2)
+mod2 <- lm(d~phen, dcombine[-32,])
 ggplot(dcombine, aes(x=pop, y=d, color=phen)) + geom_boxplot() + theme_bw() + scale_color_viridis_d(end = 0.5)
 
-
-# library(ggbiplot)
-# wine <- iris [, 1:4]
-# wine.pca <- prcomp(wine, center = TRUE, scale. = TRUE)
-# df.wine.x <- as.data.frame(wine.pca$x)
-# df.wine.x$groups <- iris$Species
-# pca.centroids <- aggregate(df.wine.x[,1:4], list(groups = df.wine.x$groups), mean)
-# library(ggplot2)
-# ggplot(df.wine.x, aes(x=PC1, y=PC2, color=groups)) + geom_point() + theme_bw() + 
-#   geom_point(data=pca.centroids, color="red", size=10, alpha=0.5) + facet_wrap(~ groups)
-# dist(df.wine.x [,-1])
-# combine <- rbind(df.wine.x[,-ncol(df.wine.x)], pca.centroids[,-1])
-# dcombine<- dist(combine, upper = TRUE) 
 ```
 
 ##  Diversity Stats
 We calculated the observed heterozygosity (Ho), heterozygote/homozygote ratio per individual (Het/Hom), the average number of pairwise differences (pi), and fixation index (Fst) using the snpR R package [@Hohenlohe2010; @Wier1984; @Hemstrom2021]. 
-<!-- use table to report diversity stats in results (which ones most diverse) get .snpr stats (in uppoer script)-->
-<!-- want ngsadmix plot, manhattan plot, pca chart with centroids (two panel one side pca and box and whiskers plots) -->
 
 ```{r}
 dat <- run_random_forest(dat, response = "phen", mtry = floor(nrow(dat)/2), num.trees = 100000)
 RF <- dat$models
 dat <- dat$data
 summary(RF$.base_.base)
+
+association <- data.table::fread("../association_out_cov.lrt0.gz")
+association$p <- pchisq(association$LRT, 1, lower.tail = FALSE)
+plot_manhattan(assocation, "p", chr = "Chromosome", bp= "Position")
+
 ```
 
 ## Association Testing
-We performed a basic association test on the data using gmmat to correct for the related among individuals and population structure (). We then performed a random forest analysis in R-studio using the ranger R package [@Wright2017]. We used 100,000 trees and used mtry of half the number of snp's. We used a random forest to predict whether the samples would be resident or migratory. Using the BGLR program, we did a genomic prediction using BayesB distribution to estimate the heritability [@Meuwissen2001]. We used 1000 burn- ins and iterations=10,000. The heritability test was done to determine the degree in which phenotypic variation is due to genetic differences among the salmon populations. 
+We performed a basic association test on the data using gmmat to correct for the related among individuals and population structure (). We then performed a random forest analysis in R-studio using the ranger R package [@Wright2017].  We used 100,000 trees and used mtry of half the number of snp's. We used a random forest to predict whether the samples would be resident or migratory. Using the BGLR program, we did a genomic prediction using BayesB distribution to estimate the heritability [@Meuwissen2001]. We used 1000 burn- ins and iterations=10,000. The heritability test was done to determine the degree in which phenotypic variation is due to genetic differences among the salmon populations. 
 
 
 ## Population Structure and Migratory Relatedness
-We then used NGSadmix (not sure how to describe this). With our data, we also made a Principle Component Analysis chart (PCA) using the ANGSD-IBS method [@Korneliussen2014]. In the PCA, we included centroids of each cluster. 
+We then used NGSadmix (not sure how to describe this). With our data, we also made a Principle Component Analysis chart (PCA) using the ANGSD-IBS method [@Korneliussen2014]. In the PCA, we included the centroids of each cluster. The centroid of each cluster is the mean of that cluster of points. 
 <!-- Will need to fill in NGSadmix -->
 
 # Results 
@@ -164,9 +145,7 @@ mean(MASU_data_table[,5], na.rm = TRUE)
 ```
 
 ##Genotyping 
-<!-- using linux raw count of # of reads -> how many reads we actually mapped (/home/hemstrow/moths/bams/W/run_read_count.sh) bamlists that are not filtered(.bam) and .sort.flt and import into R and take sum of columns that has the read count run the script twice-->  
-
-unfiltered reads = 163200129
+The number of unfiltered reads are `r sort_read_count`.  After filtering, the number of reads were `r sort_flt_read_count`. We called a total of `r number_snps_after_filtering` snps and the number of IBS loci were `r nrow(IBS)`. 
 ```{r setup, include=FALSE, eval=FALSE}
 library(readr)
 sort_read_count <- read.csv("~/Downloads/sort.read_count.txt", header = FALSE)
@@ -183,30 +162,21 @@ flt read = `r sort_flt_read_count`
 <!-- flt read = 90449126 -->
 unfiltered reads = `r sort_read_count` 
 <!-- unfiltered reads = 163200129 -->
-
-<!-- report number of snps we called nsnps (dat) and number of loci in IBS data (both in R) report number after filtering -->
 number of snps = `r number_snps_after_filtering`
 Number of snps= 71175?
 number of IBS loci = `r nrow(IBS)`
 
 ##  Diversity Stats
-<!-- see table X (embedding figures) -->
-<!-- talk about any trends like this creek had higher diversity than this  -->
-<!-- still need to work on mahanttan plot -> don't think we found anythign significant; there was not a position that greatly differed depending on the sample (in linux) -->
-<!-- What are the thresholds at which the Ho values are significant. -->
-The mean Ho values are relatively similar between the anadromous and residents individuals and between the CH and TK populations.  
-<!-- Having trouble getting the fst values -> but should match up with PCA right?  -->
-The fst values between the two populations and between anadromous and resident individuals are low, which indicated that there is not much genetic diversity between the two populations and two phenotypes. 
-<!-- report stats in excel table  -->
-There are also no private alleles between the two populations, which also indicated low genetic diveristy between the two populations of salmon. 
+The mean Ho values are relatively similar between the anadromous and residents individuals and between the CH and TK populations. The fst values between the two populations and between anadromous and resident individuals are low, which indicated that there is not much genetic diversity between the two populations and two phenotypes. There are also no private alleles between the two populations, which also indicated low genetic diversity between the two populations of salmon. 
 
 ## Association 
-<!--phenotypes and genetic basis -->
-how to write up the results of the random forest? -> did not find anything significant because the actual results did not match the predicted. report r2 value 
+The random forest predicted 25 out of 52 anadromous individuals correctly and 17 out of 44 resident individuals correctly for a total prediction accuracy of 38.6%. 
 
 ## Influence of Anadromy on Population Structure
-The distance from the other population's centroid is closer to the anadromous than the resident in one population. This indicates that the anadromous individuals within one population are more closely related to the individuals in the other population. 
-<!-- Is there anything else I should add here?  -->
+We fit a simple linear regression with the distance to the other population cluster as the response variable and the migratory phenotype as the explanatory variable. We found that the andadromous individuals clustered signficiantly closer to the cluster center for individuals from the other population (one-way ANOVA, p-value = 0.0419). This indicates that the anadromous individuals within one population are more closely related to the individuals in the other population. 
+<!-- The p value (phenR) is 0.03981775. The p value for the phenotypes is 0.0419.  -->
+
+
 <!-- control shift c --> 
 [@Gowen2014; @Ali2016]
 Gowen et al.[-@Gowen2014]
