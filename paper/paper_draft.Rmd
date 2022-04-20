@@ -127,7 +127,20 @@ We performed a basic association test on the data using gmmat to correct for the
 
 
 ## Population Structure and Migratory Relatedness
-We then used NGSadmix (not sure how to describe this). With our data, we also made a Principle Component Analysis chart (PCA) using the ANGSD-IBS method [@Korneliussen2014]. In the PCA, we included the centroids of each cluster. The centroid of each cluster is the mean of that cluster of points. 
+In order to detect any underlying population structuring within our stream systems, we used the software package NGSadmix to group samples into *k* clusters for each value of *k* between one and seven [@Skotte693]. To do so, we first called genotype posterior probailites using ANGSD with the same parameters above in addition to (fill in here). To assess variance in clustering within a given *k* value, we ran NGSadmix ten times for each value of *k* and combined the resulting data using CLUMPP [@Jakobsson2007]. We used the pophelper and snpR packages to handle files and produce plots [@Hemstrom2021; @Francis2017].
+
+For comparison, we also conducted a Principle Component Analysis chart (PCA) using the ANGSD-IBS method [@Korneliussen2014]. To look for patterns in relatedness between resident and andromous individuals, we calculated the mean PC1 and PC2 coordinates for each stream, then calculated the distance between each individual sample the mean for the other population.
+
+<!-- include that we did a one-way anova to determine if either phenotype was more closely related to the mean of the opposite population -->
+
+
+```{r ngsadmix,include=FALSE}
+setwd("../ngsadmix/")
+ngsadmix <- plot_structure(".qopt", paste0(meta$pop, "_", meta$phen), facet.order = c("CH_A", "CH_R", "TK_A", "TK_R"), k = 1:7)
+ngsadmix <- ngsadmix$plot + xlab("Population/Phenotype")
+```
+
+
 <!-- Will need to fill in NGSadmix -->
 
 # Results 
