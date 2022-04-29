@@ -26,7 +26,33 @@ fontsize: 12pt
 ---
 
 #Introduction 
-MASU salmon have two different types of lifestyles which include either being anadromous or resident. 
+
+<!-- Declines in migratory fishes -->
+<!-- 	Trends and potential causes. -->
+
+<!-- Importance of Masu -->
+<!-- 	Vulnerability -->
+<!-- 		Very prone to fishing pressure -->
+<!-- 		Very limited distribution -->
+
+<!-- Life History -->
+<!-- 	What decides if an indivividual is a resident/anadromous? -->
+
+<!-- Genetics of resident vs anadromous -->
+
+<!-- What did we do and find? -->
+<!-- 	Thesis -->
+Due to the history of hydrologic modifications such as the development of reservoirs, dams, and irrigation systems, there has been an apparent decrease in the number of migratory fishes in the recent years. For example, on the Pacific coast there has been significant decreases in diversity within salmonid species due hydrologic and dam alterations. Atlantic salmon and anadromous species of sturgeons are also impacted negatively because of a loss of portions to their habitats upstream of dams. Overall, the diversity within migratory fish species have largely declined due to these dams blocking the fishes' migratory paths. One species of migratory fish that we will be discussing more in depth is the MASU salmon. 
+
+MASU salmon, or the cherry salmon, have the most limited distribution among the Pacific salmon. Additionally, since they spend a lot of their life in freshwater rivers or streams, this makes them more inclined to be exposed to fishing and sportfishing pressures. Since they are more vulnerable than other salmon species, it is important to look into the details that influence their life cycles of being either resident or anadromous. Anadromous salmon are initially born in the rivers then migrate to the seas where they develop larger body sizes. These salmon eventually migrate back to the rivers in order to breed. The resident salmon in contrast sexually mature at a younger age and stay within the river systems throughout their entire lives (Morita and Nagasawa)
+
+MASU salmon and their life cycles have been known to be primarily influenced by environmental factors such as temperature and other factors such as the salmon's body size, growth rate and lipid stores. Environmental factors such as climate change have been known to impact the decision of the salmon to be either resident or anadromous. It has been shown that the number of resident males have increased while the proportion of anadromous males and the proportion of delayed migrants within both females and males have decreased as the temperatures have increased. The increase in resident males due to increasing temperatures have led to a significant decrease in the number of anadromous individuals. Instead of looking into environmental influences, which have already beeen heavily studied, in this paper, we will be examining if there is a genetic basis within MASU salmon that will allow us to determine the salmon's life cycle. 
+
+For comparison, within the O. mykiss species or rainbow trout, which is also a species of fish that exhibit either resident or anadromous life cycles, there is strong evidence suggesting a genetic basis on life history. The first evidence of a genetic basis for O. mykiss was when Neave (1944) conducted common garden and transplant experiments with sympatric rainbow trout and steelhead. After marking and releasing the progeny of the rainbow trout and steelhead, he found that life cycles were heritable after a larger proportion of rainbow trout offspring were recaptured over many years. Additionally, crosses between anadromous O. mykiss individuals resulted in the most smolts while crosses between resident individuals produced the fewest number of smolts. In a recent study by Hess et al. (2016), univariate analyses and a multivariate random forest (RF) machine learning algorithm was used to perform the association mapping of of 15 239 single nucleotide (SNPs) for adult migration-timing phenotype in steelhead. Using a univariate linear model resulted in the finding of three SNPs from a gene that was strongly linked with migration timing. Using multivariate analyses with RF resulted in the finding of 15 additional SNPs that were connected to 60% of the trait variation. 
+
+Like how the rainbow trout and steelhead have a clear genetic basis for their life histories, we also wanted to investigate the genetic influences on MASU salmon and their life cycles using similar methods. We performed a random forest on the data, did association tests, and found diversity statistics, which did show any clear indicator of the genetic difference between the anadromous and resident MASU salmon. However, when creating a Principle Component Analysis chart (PCA) to look for patterns in relatedness between resident and anadromous individuals, we found that the anadromous individuals clustered significantly closer to the cluster center for individuals from the other population. Overall, from the DNA analysis methods used in this paper, there is not strong evidence that there is a genetic basis for MASU salmon life histories, but further studies using a bigger sample size would need to be conducted in order to investigate the influences of genetics on MASU salmon and their life cycles. 
+
+
 ```{r, echo=FALSE, include=FALSE}
 dat<-read.table("../data/genotypes.geno")                        
 meta<- read.table("../data/sample_meta.txt", header=TRUE)
@@ -186,7 +212,7 @@ The mean Ho values are relatively similar between the anadromous and residents i
 The random forest predicted 25 out of 52 anadromous individuals correctly and 17 out of 44 resident individuals correctly for a total prediction accuracy of 38.6%. 
 
 ## Influence of Anadromy on Population Structure
-We fit a simple linear regression with the distance to the other population cluster as the response variable and the migratory phenotype as the explanatory variable. We found that the andadromous individuals clustered signficiantly closer to the cluster center for individuals from the other population (one-way ANOVA, p-value = 0.0419). This indicates that the anadromous individuals within one population are more closely related to the individuals in the other population. 
+We fit a simple linear regression with the distance to the other population cluster as the response variable and the migratory phenotype as the explanatory variable. We found that the anadromous individuals clustered signficiantly closer to the cluster center for individuals from the other population (one-way ANOVA, p-value = 0.0419). This indicates that the anadromous individuals within one population are more closely related to the individuals in the other population. 
 <!-- The p value (phenR) is 0.03981775. The p value for the phenotypes is 0.0419.  -->
 
 
