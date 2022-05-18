@@ -42,6 +42,7 @@ fontsize: 12pt
 
 <!-- What did we do and find? -->
 <!-- 	Thesis -->
+
 Due to the history of hydrologic modifications such as the development of reservoirs, dams, and irrigation systems, there has been an apparent decrease in the number of migratory fishes in the recent years. For example, on the Pacific coast there has been significant decreases in diversity within salmonid species due hydrologic and dam alterations. Atlantic salmon and anadromous species of sturgeons are also impacted negatively because of a loss of portions to their habitats upstream of dams. Overall, the diversity within migratory fish species have largely declined due to these dams blocking the fishes' migratory paths. One species of migratory fish that we will be discussing more in depth is the MASU salmon. 
 
 MASU salmon, or the cherry salmon, have the most limited distribution among the Pacific salmon. Additionally, since they spend a lot of their life in freshwater rivers or streams, this makes them more inclined to be exposed to fishing and sportfishing pressures. Since they are more vulnerable than other salmon species, it is important to look into the details that influence their life cycles of being either resident or anadromous. Anadromous salmon are initially born in the rivers then migrate to the seas where they develop larger body sizes. These salmon eventually migrate back to the rivers in order to breed. The resident salmon in contrast sexually mature at a younger age and stay within the river systems throughout their entire lives (Morita and Nagasawa)
@@ -52,7 +53,16 @@ For comparison, within the O. mykiss species or rainbow trout, which is also a s
 
 Like how the rainbow trout and steelhead have a clear genetic basis for their life histories, we also wanted to investigate the genetic influences on MASU salmon and their life cycles using similar methods. We performed a random forest on the data, did association tests, and found diversity statistics, which did show any clear indicator of the genetic difference between the anadromous and resident MASU salmon. However, when creating a Principle Component Analysis chart (PCA) to look for patterns in relatedness between resident and anadromous individuals, we found that the anadromous individuals clustered significantly closer to the cluster center for individuals from the other population. Overall, from the DNA analysis methods used in this paper, there is not strong evidence that there is a genetic basis for MASU salmon life histories, but further studies using a bigger sample size would need to be conducted in order to investigate the influences of genetics on MASU salmon and their life cycles. 
 
+<!-- Anadromous salmon -> dams causing them to not be able to jump over dams -> is we explore the genetic influences of anadromy and residents in MASU salmon then we can tell where to focus our conservation efforts. -->
 
+<!-- Parr size was generally larger and maturation was more common at more southern latitudes -->
+
+<!-- Population density and temperature two most important factors affecting the growth of the fish.  -->
+
+<!-- superior development promotes residency (early maturation) -->
+
+
+<!-- need to do citations -->
 ```{r, echo=FALSE, include=FALSE}
 dat<-read.table("../data/genotypes.geno")                        
 meta<- read.table("../data/sample_meta.txt", header=TRUE)
@@ -167,8 +177,6 @@ ngsadmix <- ngsadmix$plot + xlab("Population/Phenotype")
 ```
 
 
-<!-- Will need to fill in NGSadmix -->
-
 # Results 
 ```{r}
 MASU_data_table <- readr::read_delim("~/MASU_data_table", 
@@ -215,6 +223,15 @@ The random forest predicted 25 out of 52 anadromous individuals correctly and 17
 We fit a simple linear regression with the distance to the other population cluster as the response variable and the migratory phenotype as the explanatory variable. We found that the anadromous individuals clustered signficiantly closer to the cluster center for individuals from the other population (one-way ANOVA, p-value = 0.0419). This indicates that the anadromous individuals within one population are more closely related to the individuals in the other population. 
 <!-- The p value (phenR) is 0.03981775. The p value for the phenotypes is 0.0419.  -->
 
+# Discussion 
+## Results Discussion
+According to the PCA, there is overlap between the anadromous and resident individuals from both populations. In other words, there are not clear distinct clusters that separate the anadromous individuals from the resident individuals. This indicates there is not strong evidence for a genetic influence that determines the MASU salmon's life cycle. 
+
+## Ramifications for MASU salmon
+In these populations it is possible that residency and anadromy within MASU salmon are not solely genetically controlled and that we must take into consideration the environmental influences. When comparing MASU salmon to steelhead, steelhead and their life cycles are more heavily influenced by genetic factors. As of now, MASU salmon and their life cycles are mainly influenced my environmental factors, but further studies with larger sample sizes would need to be conducted in order to see if any genetic influences play a role. In other words, we would need still need to figure out if MASU salmon life cycles are influenced by the additive effects of genetics and environment, the multiplying effetcs of genetics and environment, or simply a result of purely environmental effects. 
+
+## Ramifications for Salmonids in General 
+In terms of the importance of this work, figuring out if MASU salmon life cycles have genetics influences will go towards their conservation efforts. For example, within steelhead fish, anadromous individuals will have to migrate upstream in order to move towards the ocean. On some occurrences the anadromous steelhead will be stopped midway towards their journey to the ocean due to manmade dams. This has caused a reduction in diversity within these fish by causing an apparent increase in resident individuals within the population. Knowing whether a fish is anadromous or resident would be helpful because people can advocate for dams to built in areas where there are a lot of anadromous fish. This same logic can also be applied towards the conservation of MASU salmon. 
 
 <!-- control shift c --> 
 [@Gowen2014; @Ali2016]
