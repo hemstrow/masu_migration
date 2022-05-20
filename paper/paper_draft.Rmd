@@ -25,6 +25,12 @@ sansfont: Times New Roman
 fontsize: 12pt
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval = FALSE, include = FALSE)
+library(ggplot2); library(RefManageR); library(snpR)
+
+```
+
 #Introduction 
 
 <!-- Declines in migratory fishes -->
@@ -63,36 +69,39 @@ Like how the rainbow trout and steelhead have a clear genetic basis for their li
 
 
 <!-- need to do citations -->
-```{r, echo=FALSE, include=FALSE}
+```{r, include=FALSE, eval=TRUE}
 dat<-read.table("../data/genotypes.geno")                        
 meta<- read.table("../data/sample_meta.txt", header=TRUE)
 snp.meta<- dat[,1:2]
 colnames(snp.meta)<- c("chr", "position")
 library(snpR)
-dat<- import.snpR.data(dat[,-c(1:2)], snp.meta = snp.meta, sample.meta = meta)
-dat<- filter_snps(dat, maf = 0.05, hwe = 0.000001)
-number_snps_after_filtering <- nsnps(dat)
+# dat<- import.snpR.data(dat[,-c(1:2)], snp.meta = snp.meta, sample.meta = meta)
+# dat<- filter_snps(dat, maf = 0.05, hwe = 0.000001)
+# number_snps_after_filtering <- nsnps(dat)
+# 
+# #calculating genetic diversity
+# dat <- calc_ho(dat, c("pop", "phen", "pop.phen"))
+# get.snpR.stats(dat, c("phen", "pop","pop.phen"), stats="ho") $weighted.means
+# get.snpR.stats(dat, c("pop", "phen", "pop.phen"))
+# dat <- calc_fis(dat, c("pop", "phen"))
+# dat <- calc_pi(dat, c("pop", "phen"))
+# get.snpR.stats(dat, c("pop"), stats="pi") $weighted.means
+# dat <- calc_private(dat, c("phen", "pop","pop.phen"))
+# get.snpR.stats(dat, c("pop"), stats="private") $weighted.means
+# get.snpR.stats(dat, c("pop", "phen", "pop.phen"))
+# dat <- calc_pairwise_fst(dat, c("phen", "pop","pop.phen"), boot = 100, boot_par = 2)
+# get.snpR.stats(dat, c("phen", "pop","pop.phen"), stats="fst") $weighted.means
+# get.snpR.stats(dat, c("pop", "phen"), stats= c("ho", "pi", "fst")) $weighted.means
+# 
+# gp<- run_genomic_prediction(dat, response = "phen", iterations = 10000, burn_in = 1000, thin = 100)
+# library(data.table)
+# cv<- cross_validate_genomic_prediction(dat, response = "phen", iterations = 10000, burn_in = 1000, thin = 100)
 
-#calculating genetic diversity
-dat <- calc_ho(dat, c("pop", "phen", "pop.phen"))
-get.snpR.stats(dat, c("phen", "pop","pop.phen"), stats="ho") $weighted.means
-get.snpR.stats(dat, c("pop", "phen", "pop.phen"))
-dat <- calc_fis(dat, c("pop", "phen"))
-dat <- calc_pi(dat, c("pop", "phen"))
-get.snpR.stats(dat, c("pop"), stats="pi") $weighted.means
-dat <- calc_private(dat, c("phen", "pop","pop.phen"))
-get.snpR.stats(dat, c("pop"), stats="private") $weighted.means
-get.snpR.stats(dat, c("pop", "phen", "pop.phen"))
-dat <- calc_pairwise_fst(dat, c("phen", "pop","pop.phen"), boot = 100, boot_par = 2)
-get.snpR.stats(dat, c("phen", "pop","pop.phen"), stats="fst") $weighted.means
-get.snpR.stats(dat, c("pop", "phen"), stats= c("ho", "pi", "fst")) $weighted.means
+# saveRDS(dat, "processed_genotypes.RDS")
+# saveRDS(gp, "gp.RDS")
 
-gp<- run_genomic_prediction(dat, response = "phen", iterations = 10000, burn_in = 1000, thin = 100)
-library(data.table)
-cv<- cross_validate_genomic_prediction(dat, response = "phen", iterations = 10000, burn_in = 1000, thin = 100)
-
-saveRDS(dat, "processed_genotypes.RDS")
-saveRDS(gp, "gp.RDS")
+dat <- readRDS("../processed_genotypes.RDS")
+gp <- readRDS("gp.RDS")
 
 ```
 # Methods:
@@ -100,7 +109,7 @@ saveRDS(gp, "gp.RDS")
 We extracted DNA from our samples using the magnetic bead approach [@Ali2016]. We then prepared Restriction Associated Digest (RAD) libraries using the Pst1 restriction enzyme [@Ali2016] and sequenced the results on an Illumina Hi-Seq 4000 using 150bp paired-end sequencing. We aligned the data to the O. mykiss v6 reference genome [@Pearse2019] using Burrows-Wheeler Alignment algorithm Aligner [@Li2009]. We then filtered the data for PCR duplicates and improper pairs using SAMtools [@Li2009]. Next, we called the genotypes by using the SAMtools genotype likelihood models [@Li2009] used in the ANGSD software package with a minimum mapping and base call quality score of 20, a SNP p-value of 1e-8, and a minimum acceptable minor allele frequency of 0.05 [@Korneliussen2014]. We also used a minor allele frequency filter (MAF) and a Hardy-Weinberg equilibrium filter using snpR when calling the genotypes [@Wigginton2005]. 
 <!-- flagstat google (data script i wrote) -->
 
-```{r}
+```{r, eval=TRUE, include=FALSE}
 mat <- read.table("../angsdput.covMat")
 IBS <- data.table::fread("../angsdput.covMat")
 nrow(IBS)
@@ -146,15 +155,18 @@ ggplot(dcombine, aes(x=pop, y=d, color=phen)) + geom_boxplot() + theme_bw() + sc
 ##  Diversity Stats
 We calculated the observed heterozygosity (Ho), heterozygote/homozygote ratio per individual (Het/Hom), the average number of pairwise differences (pi), and fixation index (Fst) using the snpR R package [@Hohenlohe2010; @Wier1984; @Hemstrom2021]. 
 
-```{r}
-dat <- run_random_forest(dat, response = "phen", mtry = floor(nrow(dat)/2), num.trees = 100000)
-RF <- dat$models
-dat <- dat$data
-summary(RF$.base_.base)
+```{r, eval=TRUE, include=FALSE}
+# dat <- run_random_forest(dat, response = "phen", mtry = floor(nrow(dat)/2), num.trees = 100000)
+# RF <- dat$models
+# dat <- dat$data
+# summary(RF$.base_.base)
+# saveRDS("RF", "RF.RDS")
+RF <- readRDS("RF.RDS")
+
 
 association <- data.table::fread("../association_out_cov.lrt0.gz")
 association$p <- pchisq(association$LRT, 1, lower.tail = FALSE)
-plot_manhattan(assocation, "p", chr = "Chromosome", bp= "Position")
+plot_manhattan(association, "p", chr = "Chromosome", bp= "Position", log.p = TRUE)
 
 ```
 
@@ -170,7 +182,7 @@ For comparison, we also conducted a Principle Component Analysis chart (PCA) usi
 <!-- include that we did a one-way anova to determine if either phenotype was more closely related to the mean of the opposite population -->
 
 
-```{r ngsadmix,include=FALSE}
+```{r ngsadmix, include=FALSE}
 setwd("../ngsadmix/")
 ngsadmix <- plot_structure(".qopt", paste0(meta$pop, "_", meta$phen), facet.order = c("CH_A", "CH_R", "TK_A", "TK_R"), k = 1:7)
 ngsadmix <- ngsadmix$plot + xlab("Population/Phenotype")
@@ -178,7 +190,7 @@ ngsadmix <- ngsadmix$plot + xlab("Population/Phenotype")
 
 
 # Results 
-```{r}
+```{r, include=FALSE}
 MASU_data_table <- readr::read_delim("~/MASU_data_table", 
     delim = "\t", escape_double = FALSE, 
     trim_ws = TRUE, skip = 4)
@@ -193,7 +205,7 @@ mean(MASU_data_table[,5], na.rm = TRUE)
 
 ##Genotyping 
 The number of unfiltered reads are `r sort_read_count`.  After filtering, the number of reads were `r sort_flt_read_count`. We called a total of `r number_snps_after_filtering` snps and the number of IBS loci were `r nrow(IBS)`. 
-```{r setup, include=FALSE, eval=FALSE}
+```{r read, include=FALSE}
 library(readr)
 sort_read_count <- read.csv("~/Downloads/sort.read_count.txt", header = FALSE)
 View(sort_read_count)
