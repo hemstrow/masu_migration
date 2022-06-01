@@ -183,11 +183,11 @@ mean(MASU_data_table[,5], na.rm = TRUE)
 
 ```{r read, include=FALSE, eval=TRUE}
 library(readr)
-sort_read_count <- read.csv("~/Downloads/sort.read_count.txt", header = FALSE)
+sort_read_count <- read.csv("../sort.read_count.txt", header = FALSE)
 # View(sort_read_count)
 sort_read_count <- sum(sort_read_count$V1)
 
-sort_flt_read_count <- read.csv("~/Downloads/sort.flt.read_count.txt", header = FALSE)
+sort_flt_read_count <- read.csv("../sort.flt.read_count.txt", header = FALSE)
 # View(sort_flt_read_count)
 sort_flt_read_count <- sum(sort_flt_read_count$V1)
 
