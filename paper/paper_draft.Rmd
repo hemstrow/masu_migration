@@ -77,6 +77,7 @@ library(snpR)
 
 dat <- readRDS("../processed_genotypes.RDS")
 gp <- readRDS("gp.RDS")
+number_snps_after_filtering <- nsnps(dat)
 
 ```
 # Methods:
@@ -128,7 +129,7 @@ ggplot(dcombine, aes(x=pop, y=d, color=phen)) + geom_boxplot() + theme_bw() + sc
 ```
 
 ##  Diversity Stats
-We calculated the observed heterozygosity ($H_{o}$), the average number of pairwise differences ($\pi$), number of private alleles, and fixation index ($F_{st}$) between populations using the snpR R package [@Hohenlohe2010; @Wier1984; @Hemstrom2021].
+We calculated the observed heterozygosity ($H_{o}$), the average number of pairwise differences ($\pi$), number of private alleles, and fixation index ($F_{st}$) between populations using the snpR R package [@Hohenlohe2010; @Weir1984; @Hemstrom2021].
 
 ```{r, eval=TRUE, include=FALSE}
 # dat <- run_random_forest(dat, response = "phen", mtry = floor(nrow(dat)/2), num.trees = 100000)
