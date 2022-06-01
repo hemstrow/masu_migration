@@ -31,7 +31,11 @@ library(ggplot2); library(RefManageR); library(snpR)
 
 ```
 
-#Abstract
+# Abstract 
+
+Within Masu salmon (Oncorhynchus masou), individuals can exhibit one of two life histories: resident individuals which stay in streams for their entire life span or anadromous individuals which move to the ocean to mature before returning to their natal streams to breed. Current research has suggested that the expression of either life history is mainly influenced by environmental factors such as temperature, which influence critical traits like salmon's body size, growth rate, lipid stores. Here, we use high-resolution reduced-representation genome sequencing to show that there are no significant genetic associations with migratory decision making in masu salmon in two streams in Hokkaido, Japan. Further research with a larger sample size from more parts of the masu range is needed in order to fully assess potential genetic influences on anadromy and residency in the species.
+
+# Introduction
 
 Due to the history of hydrologic modifications such as the development of reservoirs, dams, and irrigation systems, there has been an apparent decrease in the number of migratory fishes in recent years [@Pringle2000]. In North America, for example,there have been significant decreases in diversity within pacific salmonid species due to hydrologic and dam alterations, and atlantic salmon and anadromous species of sturgeons are also impacted negatively because of a loss of portions to their habitats upstream of dams [@Pringle2000]. Overall, the diversity within migratory fish species have largely declined by an average of 70% between 1970 and 2016 due to these dams blocking the fishes' migratory paths [@deinet2020living].
 
@@ -180,7 +184,7 @@ mean(MASU_data_table[,3], na.rm = TRUE)
 mean(MASU_data_table[,5], na.rm = TRUE)
 ```
 
-##Genotyping 
+## Genotyping 
 
 ```{r read, include=FALSE, eval=TRUE}
 library(readr)
@@ -237,13 +241,13 @@ Our results suggest that, at least in some areas, residency and anadromy within 
 
 # Figures:
 
-```{r Figure_1_print,echo=FALSE,warning=FALSE,fig.cap="Figure 1: Association across the genome with migratory status showing that no loci were found that were significantly associated with the given traits (anadromy and residency)",fig.width=7, fig.height=4, fig.align='center', fig.cap.style="Image Caption"}
+```{r Figure_1_print,echo=FALSE,warning=FALSE, include=TRUE,fig.cap="Figure 1: Association across the genome with migratory status showing that no loci were found that were significantly associated with the given traits (anadromy and residency)",fig.width=7, fig.height=4, fig.align='center', fig.cap.style="Image Caption"}
 figure_1$plot
 
 ```
 
 
-```{r Figure_2_print,echo=FALSE,warning=FALSE,fig.cap="Figure 2: PCA plot showing the relatedness between anadromous and resident individuals in TK and CH populations",fig.width=7, fig.height=4, fig.align='center', fig.cap.style="Image Caption"}
+```{r Figure_2_print,echo=FALSE,warning=FALSE,include=TRUE,fig.cap="Figure 2: PCA plot showing the relatedness between anadromous and resident individuals in TK and CH populations",fig.width=7, fig.height=4, fig.align='center', fig.cap.style="Image Caption"}
 p1 
 
 ```
