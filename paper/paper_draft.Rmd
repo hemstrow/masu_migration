@@ -90,7 +90,7 @@ We extracted DNA from our samples using the magnetic beads and prepared Restrict
 <!-- flagstat google (data script i wrote) -->
 
 ```{r, eval=TRUE, include=FALSE}
-mat <- read.table("../angsdput.covMat")
+# mat <- read.table("../angsdput.covMat")
 IBS <- data.table::fread("../angsdput.covMat")
 IBS.loci <- data.table::fread("../data/angsdput.ibs.gz")
 nrow(IBS)
@@ -242,13 +242,13 @@ Our results suggest that, at least in some areas, residency and anadromy within 
 
 # Figures:
 
-```{r Figure_1_print,echo=FALSE,warning=FALSE, include=TRUE,fig.cap="Figure 1: Association across the genome with migratory status showing that no loci were found that were significantly associated with the given traits (anadromy and residency)",fig.width=7, fig.height=4, fig.align='center', fig.cap.style="Image Caption"}
+```{r Figure_1_print,echo=FALSE,warning=FALSE,eval=TRUE,include=TRUE,fig.cap="Figure 1: Association across the genome with migratory status showing that no loci were found that were significantly associated with the given traits (anadromy and residency)",fig.width=7, fig.height=4, fig.align='center', fig.cap.style="Image Caption"}
 figure_1$plot
 
 ```
 
 
-```{r Figure_2_print,echo=FALSE,warning=FALSE,include=TRUE,fig.cap="Figure 2: PCA plot showing the relatedness between anadromous and resident individuals in TK and CH populations",fig.width=7, fig.height=4, fig.align='center', fig.cap.style="Image Caption"}
+```{r Figure_2_print,echo=FALSE,warning=FALSE,eval=TRUE,include=TRUE,fig.cap="Figure 2: PCA plot showing the relatedness between anadromous and resident individuals in TK and CH populations",fig.width=7, fig.height=4, fig.align='center', fig.cap.style="Image Caption"}
 p1 
 
 ```
