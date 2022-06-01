@@ -81,7 +81,7 @@ gp <- readRDS("gp.RDS")
 ```
 # Methods:
 ## Genotyping 
-We extracted DNA from our samples using the magnetic bead approach [@Ali2016]. We then prepared Restriction Associated Digest (RAD) libraries using the Pst1 restriction enzyme [@Ali2016] and sequenced the results on an Illumina Hi-Seq 4000 using 150bp paired-end sequencing. We aligned the data to the O. mykiss v6 reference genome [@Pearse2019] using Burrows-Wheeler Alignment algorithm Aligner [@Li2009]. We then filtered the data for PCR duplicates and improper pairs using SAMtools [@Li2009]. Next, we called the genotypes by using the SAMtools genotype likelihood models [@Li2009] used in the ANGSD software package with a minimum mapping and base call quality score of 20, a SNP p-value of 1e-8, and a minimum acceptable minor allele frequency of 0.05 [@Korneliussen2014]. We also used a minor allele frequency filter (MAF) and a Hardy-Weinberg equilibrium filter using snpR when calling the genotypes [@Wigginton2005]. 
+We extracted DNA from our samples using the magnetic beads and prepared Restriction Associated Digest (RAD) libraries using the Pst1 restriction enzyme according to Ali et al [-@Ali2016], then sequenced the results on an Illumina Hi-Seq 4000 using 150bp paired-end sequencing. We aligned the data to the *O. mykiss* v6 reference genome [@Pearse2019] using Burrows-Wheeler Alignment algorithm [@Li2009]. We then filtered the data for PCR duplicates and improper pairs using SAMtools [@Li2009]. Next, we called  genotypes by using the SAMtools genotype likelihood models [@Li2009] used in the ANGSD software package with a minimum mapping and base call quality score of 20, a SNP p-value of 1e-8, and a minimum acceptable minor allele frequency of 0.05 [@Korneliussen2014]. We then removed loci out of Hardy-Weinberg Equilibrium ($p \le 0.000001$) according to Wigginton et al.'s [@Wigginton2005] method using the snpR R package [@Hemstrom2021]. 
 <!-- flagstat google (data script i wrote) -->
 
 ```{r, eval=TRUE, include=FALSE}
@@ -128,7 +128,7 @@ ggplot(dcombine, aes(x=pop, y=d, color=phen)) + geom_boxplot() + theme_bw() + sc
 ```
 
 ##  Diversity Stats
-We calculated the observed heterozygosity (Ho), heterozygote/homozygote ratio per individual (Het/Hom), the average number of pairwise differences (pi), and fixation index (Fst) using the snpR R package [@Hohenlohe2010; @Wier1984; @Hemstrom2021]. 
+We calculated the observed heterozygosity ($H_{o}$), the average number of pairwise differences ($\pi$), number of private alleles, and fixation index ($F_{st}$) between populations using the snpR R package [@Hohenlohe2010; @Wier1984; @Hemstrom2021]. 
 
 ```{r, eval=TRUE, include=FALSE}
 # dat <- run_random_forest(dat, response = "phen", mtry = floor(nrow(dat)/2), num.trees = 100000)
@@ -146,13 +146,19 @@ plot_manhattan(association, "p", chr = "Chromosome", bp= "Position", log.p = TRU
 ```
 
 ## Association Testing
+<<<<<<< HEAD
 We performed a basic association test on the data using gmmat to correct for the related among individuals and population structure (). We then performed a random forest analysis in R-studio using the ranger R package [@Wright2017]. We used 100,000 trees and used mtry of half the number of snp's. We used a random forest to predict whether the samples would be resident or migratory. Using the BGLR program, we did a genomic prediction using BayesB distribution to estimate the heritability [@Meuwissen2001]. We used 1000 burn- ins and iterations=10,000. The heritability test was done to determine the degree in which phenotypic variation is due to genetic differences among the salmon populations. 
+=======
+We performed a basic association test against migratory phenotype using ANGSD using the first 20 Principal Component Analysis components as covariates to correct for the related among individuals and population structure [@Korneliussen2014]. To increase our association resolution, we used used genotype likelihoods instead of called gneotypes to conduct our association test, generated in ANGSD using the same parameters described above. In order to see if any more complex genetic relationships could predict migratory phenotype, we then performed a random forest analysis in R-studio using the ranger R package [@Wright2017]. We used 100,000 trees and used mtry of half the number of called SNPs.
+
+<!-- We also used the BGLR program to perform a genomic prediction using BayesB distribution to estimate the heritability [@Meuwissen2001]. We used 1,000 burn-ins and 10,000 estimation iterations. The heritability test was done to determine the degree in which phenotypic variation is due to genetic differences among the salmon populations.  -->
+>>>>>>> e30ebae3cee04d299e8922caa80c9e22b60a9589
 
 
 ## Population Structure and Migratory Relatedness
-In order to detect any underlying population structuring within our stream systems, we used the software package NGSadmix to group samples into *k* clusters for each value of *k* between one and seven [@Skotte693]. To do so, we first called genotype posterior probailites using ANGSD with the same parameters above in addition to (fill in here). To assess variance in clustering within a given *k* value, we ran NGSadmix ten times for each value of *k* and combined the resulting data using CLUMPP [@Jakobsson2007]. We used the pophelper and snpR packages to handle files and produce plots [@Hemstrom2021; @Francis2017].
+In order to detect any underlying population structuring within our stream systems, we used the software package NGSadmix to group samples into *k* clusters for each value of *k* between one and seven [@Skotte693] using the genotype likelihoods mentioned above. To assess variance in clustering within a given *k* value, we ran NGSadmix ten times for each value of *k* and combined the resulting data using CLUMPP [@Jakobsson2007]. We used the pophelper and snpR packages to handle files and produce plots, respectively [@Hemstrom2021; @Francis2017].
 
-For comparison, we also conducted a Principle Component Analysis chart (PCA) using the ANGSD-IBS method [@Korneliussen2014]. To look for patterns in relatedness between resident and andromous individuals, we calculated the mean PC1 and PC2 coordinates for each stream, then calculated the distance between each individual sample the mean for the other population.
+For comparison, we also conducted a Principle Component Analysis chart (PCA) using the ANGSD-IBS method [@Korneliussen2014]. To look for patterns in relatedness between resident and andromous individuals, we calculated the mean PC1 and PC2 coordinates for each stream, then calculated the distance between each individual sample the mean for the other population. We fit a simple linear regression with the distance to the other population cluster as the response variable and the migratory phenotype as the explanatory variable.
 
 <!-- include that we did a one-way anova to determine if either phenotype was more closely related to the mean of the opposite population -->
 
@@ -179,7 +185,7 @@ mean(MASU_data_table[,5], na.rm = TRUE)
 ```
 
 ##Genotyping 
-The number of unfiltered reads are `r sort_read_count`.  After filtering, the number of reads were `r sort_flt_read_count`. We called a total of `r number_snps_after_filtering` snps and the number of IBS loci were `r nrow(IBS)`. 
+The number of unfiltered reads are `r sort_read_count`.  After filtering, the number of reads were `r sort_flt_read_count`. We called a total of `r number_snps_after_filtering` SNPs and `r nrow(IBS)` IBS loci. 
 ```{r read, include=FALSE}
 library(readr)
 sort_read_count <- read.csv("~/Downloads/sort.read_count.txt", header = FALSE)
@@ -192,22 +198,22 @@ sort_flt_read_count <- sum(sort_flt_read_count$V1)
 
 ```
 
-flt read = `r sort_flt_read_count` 
+<!-- flt read = `r sort_flt_read_count`  -->
 <!-- flt read = 90449126 -->
-unfiltered reads = `r sort_read_count` 
+<!-- unfiltered reads = `r sort_read_count`  -->
 <!-- unfiltered reads = 163200129 -->
-number of snps = `r number_snps_after_filtering`
-Number of snps= 71175?
-number of IBS loci = `r nrow(IBS)`
+<!-- number of snps = `r number_snps_after_filtering` -->
+<!-- Number of snps= 71175? -->
+<!-- number of IBS loci = `r nrow(IBS)` -->
 
 ##  Diversity Stats
-The mean Ho values are relatively similar between the anadromous and residents individuals and between the CH and TK populations. The fst values between the two populations and between anadromous and resident individuals are low, which indicated that there is not much genetic diversity between the two populations and two phenotypes. There are also no private alleles between the two populations, which also indicated low genetic diversity between the two populations of salmon. 
+The mean $H_{o}$ values are relatively similar between the anadromous and residents individuals and between the CH and TK populations. The $F_{ST}$ values between the two populations and between anadromous and resident individuals were very low, which indicated that there is not much genetic diversity between the two populations and two phenotypes. There are also no private alleles between the two populations, which also indicated low genetic differentiation between the two populations of salmon. 
 
-## Association 
-The random forest predicted 25 out of 52 anadromous individuals correctly and 17 out of 44 resident individuals correctly for a total prediction accuracy of 38.6%. 
+## Association
+We did not find any strong associations with migratory life history status at any loci, and the random forest only successfully predicted 25 out of 52 anadromous individuals correctly and 17 out of 44 resident individuals correctly for a total prediction accuracy of 38.6%.
 
 ## Influence of Anadromy on Population Structure
-We fit a simple linear regression with the distance to the other population cluster as the response variable and the migratory phenotype as the explanatory variable. We found that the anadromous individuals clustered signficiantly closer to the cluster center for individuals from the other population (one-way ANOVA, p-value = 0.0419). This indicates that the anadromous individuals within one population are more closely related to the individuals in the other population. 
+ We found that the anadromous individuals clustered significantly closer to the cluster center for individuals from the other population (one-way ANOVA, p-value = 0.0419). This indicates that the anadromous individuals within one population were more closely related to the individuals in the other population than were residents. 
 <!-- The p value (phenR) is 0.03981775. The p value for the phenotypes is 0.0419.  -->
 
 # Discussion
