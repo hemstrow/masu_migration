@@ -92,6 +92,7 @@ We extracted DNA from our samples using the magnetic beads and prepared Restrict
 ```{r, eval=TRUE, include=FALSE}
 mat <- read.table("../angsdput.covMat")
 IBS <- data.table::fread("../angsdput.covMat")
+IBS.loci <- data.table::fread("../data/angsdput.ibs.gz")
 nrow(IBS)
 IBS <- IBS[-32,-c(97, 32)]
 pca_r <- eigen(IBS)
@@ -198,7 +199,7 @@ sort_flt_read_count <- sum(sort_flt_read_count$V1)
 
 ```
 
-The number of unfiltered reads are `r prettyNum(sort_read_count,big.mark=",",scientific=FALSE)`. After filtering, the number of reads were `r prettyNum(sort_flt_read_count,big.mark=",",scientific=FALSE)`. We called a total of `r prettyNum(number_snps_after_filtering,big.mark=",",scientific=FALSE)` SNPs and `r prettyNum(nrow(IBS),big.mark=",",scientific=FALSE)` IBS loci. 
+The number of unfiltered reads are `r prettyNum(sort_read_count,big.mark=",",scientific=FALSE)`. After filtering, the number of reads were `r prettyNum(sort_flt_read_count,big.mark=",",scientific=FALSE)`. We called a total of `r prettyNum(number_snps_after_filtering,big.mark=",",scientific=FALSE)` SNPs and `r prettyNum(nrow(IBS.loci),big.mark=",",scientific=FALSE)` IBS loci. 
 <!-- flt read = `r sort_flt_read_count`  -->
 <!-- flt read = 90449126 -->
 <!-- unfiltered reads = `r sort_read_count`  -->
@@ -220,7 +221,7 @@ We did not find any strong associations with migratory life history status at an
 # Discussion
 ## Genetic Associations with Migration
 
-We did not find any significant genetic associations with migratory phenotype (see Figure X). This indicates that in the streams we examined, there may not be any loci in the genome that strongly contribute to migratory life history decisions. It is not therefore surprising that the random forest which we conducted also did not have strong predictive power for anadromy and residency, since it would not be able to accurately group the individuals to their actual life history if there are no genetic elements that contribute to migratory phenotype.
+We did not find any significant genetic associations with migratory phenotype (see Figure 1). This indicates that in the streams we examined, there may not be any loci in the genome that strongly contribute to migratory life history decisions. It is not therefore surprising that the random forest which we conducted also did not have strong predictive power for anadromy and residency, since it would not be able to accurately group the individuals to their actual life history if there are no genetic elements that contribute to migratory phenotype.
 
 However, our study included samples from only a small region at the center of the masu range. It is possible that if we sampled from other areas, we could uncover loci that influence migratory life history phenotypes under environmental conditions that differ from those in our study systems. This could occur if the effect of migratory genes depends on environmental conditions (GxE). This phenomena is seen in steelhead, where variance in environmental conditions across the species’ range can determine whether life histories are more genetically or environmentally based [@Kendall2015].
 
