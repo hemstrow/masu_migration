@@ -1,5 +1,5 @@
 ---
-title: "No Detectable Evidence of Genetic Associations Between Anadromous and Resident Masu Salmon Sampled within Hokkaido"
+title: "No Detectable Evidence of Genetic Associations with Anadromous and Resident Masu Salmon Sampled within Hokkaido"
 author: "William Hemstrom"
 date: "11/21/2021"
 output:
@@ -11,7 +11,7 @@ output:
     latex_engine: pdflatex
     fig_width: 7
     fig_height: 6
-bibliography: "Citations.bib"
+bibliography: "MASU_Paper_References.bib"
 csl: "council-of-science-editors-author-date.csl"
 header-includes:
   - \usepackage[left]{lineno}
@@ -33,13 +33,13 @@ library(ggplot2); library(RefManageR); library(snpR)
 
 #Abstract
 
-Due to the history of hydrologic modifications such as the development of reservoirs, dams, and irrigation systems, there has been an apparent decrease in the number of migratory fishes in recent years (Pringle et al., 2000). In North America, for example,there have been significant decreases in diversity within pacific salmonid species due to hydrologic and dam alterations, and atlantic salmon and anadromous species of sturgeons are also impacted negatively because of a loss of portions to their habitats upstream of dams (Pringle et al., 2000). Overall, the diversity within migratory fish species have largely declined by an average of 70% between 1970 and 2016 due to these dams blocking the fishes' migratory paths (Deinet et al., 2020).
+Due to the history of hydrologic modifications such as the development of reservoirs, dams, and irrigation systems, there has been an apparent decrease in the number of migratory fishes in recent years [@Pringle2000]. In North America, for example,there have been significant decreases in diversity within pacific salmonid species due to hydrologic and dam alterations, and atlantic salmon and anadromous species of sturgeons are also impacted negatively because of a loss of portions to their habitats upstream of dams [@Pringle2000]. Overall, the diversity within migratory fish species have largely declined by an average of 70% between 1970 and 2016 due to these dams blocking the fishes' migratory paths [@deinet2020living].
 
-Masu salmon (Oncorhynchus masou, otherwise known as cherry salmon) have the most limited distribution among the Pacific salmon. Since they spend a greater portion of their life in freshwater rivers or streams than most other migratory salmon, they are particularly exposed to fishing and sportfishing pressures (Miyakoshi et al., 2009). Their increased vulnerability makes it critical to understand the details that influence and control migratory life history variance in the species. Masu in particular (like steelhead salmon/rainbow trout Oncorhynchus mykiss and other species to a lesser degree) are partially migratory, with large resident and anadromous populations (Morita et al., 2014). As is typical, anadromous masu are initially born in the rivers then migrate to the seas where they develop larger body sizes, then eventually migrate back to their natal rivers in order to breed (Dodson et al., 2013). Resident masu in contrast sexually mature at a younger age and stay within the river systems throughout their entire lives (Morita and Nagasawa).
+Masu salmon (Oncorhynchus masou, otherwise known as cherry salmon) have the most limited distribution among the Pacific salmon. Since they spend a greater portion of their life in freshwater rivers or streams than most other migratory salmon, they are particularly exposed to fishing and sportfishing pressures [@Miyakoshi2009]. Their increased vulnerability makes it critical to understand the details that influence and control migratory life history variance in the species. Masu in particular (like steelhead salmon/rainbow trout Oncorhynchus mykiss and other species to a lesser degree) are partially migratory, with large resident and anadromous populations [@Morita2014]. As is typical, anadromous masu are initially born in the rivers then migrate to the seas where they develop larger body sizes, then eventually migrate back to their natal rivers in order to breed [@Dodson2013]. Resident masu in contrast sexually mature at a younger age and stay within the river systems throughout their entire lives [@Morita2010].
 
-The decision to migrate in masu salmon is thought to be primarily influenced by environmental factors such as temperature alongside other factors such as the salmon's body size, growth rate, lipid stores, and is heavily sex influenced (Morita et al., 2014; Arostegui & Quinn, 2019). Consequently, changes in environmental factors, such as those caused by climate change, have been known to impact the decision of the masu to be either resident or anadromous (Morita et al., 2014). For example, Morita et al (2014) has shown that the number of resident males have increased while the proportion of anadromous males and the proportion of delayed migrants within both females and males have decreased as the temperatures have increased, which has led to a significant decrease in the number of anadromous individuals overall.
+The decision to migrate in masu salmon is thought to be primarily influenced by environmental factors such as temperature alongside other factors such as the salmon's body size, growth rate, lipid stores, and is heavily sex influenced [@Morita2014; @Arostegui2019]. Consequently, changes in environmental factors, such as those caused by climate change, have been known to impact the decision of the masu to be either resident or anadromous [@Morita2014]. For example, Morita et al (2014) has shown that the number of resident males have increased while the proportion of anadromous males and the proportion of delayed migrants within both females and males have decreased as the temperatures have increased, which has led to a significant decrease in the number of anadromous individuals overall.
 
-In contrast, the genetic factors that contribute to migration in masu salmon have not been well studied.  Despite the prevalence of environmental control of migration in masu, it is not unreasonable to expect genetic elements to play some role in governing migratory decisions in the species. For example, within steelhead, there is strong evidence suggesting both an environmental and genetic basis for migratory life history. In 1944, Naeve conducted common garden and transplant experiments with sympatric rainbow trout and steelhead and found that migratory status was heritable after observing that rainbow trout offspring were considerably more likely to be resident themselves, whereas  crosses between anadromous individuals resulted in the most anadromous smolts. It is not surprising, therefore, that a recent study by Hess et al. (2016), on 15,239 single nucleotide polymorphisms (SNPs) found of three SNPs from a gene that was strongly linked with adult migration timing, and that 18 total SNPs that were connected to 60% of the trait variation. Despite this, however, growth rates and body condition are known to influence anadromy in the species—individuals which grow faster as juveniles are more likely to stay as residents than otherwise (Kendall et al., 2014). Growth rates are also known to be influenced by large genetic elements that differ between anadromous and resident individuals, implying that genetics may contribute to migration indirectly as well (Miller et al., 2011). Taken together, it seems clear that migration in steelhead is  jointly controlled by the interplay of genetic and environmental factors.
+In contrast, the genetic factors that contribute to migration in masu salmon have not been well studied.  Despite the prevalence of environmental control of migration in masu, it is not unreasonable to expect genetic elements to play some role in governing migratory decisions in the species. For example, within steelhead, there is strong evidence suggesting both an environmental and genetic basis for migratory life history. In 1944, Naeve conducted common garden and transplant experiments with sympatric rainbow trout and steelhead and found that migratory status was heritable after observing that rainbow trout offspring were considerably more likely to be resident themselves, whereas  crosses between anadromous individuals resulted in the most anadromous smolts. It is not surprising, therefore, that a recent study by Hess et al. [-@Hess2016], on 15,239 single nucleotide polymorphisms (SNPs) found of three SNPs from a gene that was strongly linked with adult migration timing, and that 18 total SNPs that were connected to 60% of the trait variation. Despite this, however, growth rates and body condition are known to influence anadromy in the species—individuals which grow faster as juveniles are more likely to stay as residents than otherwise [@Kendall2015]. Growth rates are also known to be influenced by large genetic elements that differ between anadromous and resident individuals, implying that genetics may contribute to migration indirectly as well [@MILLER2012]. Taken together, it seems clear that migration in steelhead is  jointly controlled by the interplay of genetic and environmental factors.
 
 The degree of genetic control of migration in masu, however, is still not well known. To improve our understanding of the mechanisms behind residency and anadromy in the species, we sequenced a set of anadromous and resident masu individuals using high-resolution Restriction Associated Digest (RAD) sequencing.  However, we did not find any clear indicator of the genetic difference between our anadromous and resident masu salmon. While this may suggest that there is not that there is a strong genetic basis for masu salmon migratory life history variation, further studies using a bigger sample size from a larger geographic range would need to be conducted in order to fully investigate the influences of genetics on Masu salmon migratory life cycles.
 
@@ -128,7 +128,7 @@ ggplot(dcombine, aes(x=pop, y=d, color=phen)) + geom_boxplot() + theme_bw() + sc
 ```
 
 ##  Diversity Stats
-We calculated the observed heterozygosity ($H_{o}$), the average number of pairwise differences ($\pi$), number of private alleles, and fixation index ($F_{st}$) between populations using the snpR R package [@Hohenlohe2010; @Wier1984; @Hemstrom2021]. 
+We calculated the observed heterozygosity ($H_{o}$), the average number of pairwise differences ($\pi$), number of private alleles, and fixation index ($F_{st}$) between populations using the snpR R package [@Hohenlohe2010; @Wier1984; @Hemstrom2021].
 
 ```{r, eval=TRUE, include=FALSE}
 # dat <- run_random_forest(dat, response = "phen", mtry = floor(nrow(dat)/2), num.trees = 100000)
@@ -141,26 +141,21 @@ RF <- readRDS("RF.RDS")
 
 association <- data.table::fread("../association_out_cov.lrt0.gz")
 association$p <- pchisq(association$LRT, 1, lower.tail = FALSE)
-plot_manhattan(association, "p", chr = "Chromosome", bp= "Position", log.p = TRUE)
+figure_1 <- plot_manhattan(association, "p", chr = "Chromosome", bp= "Position", log.p = TRUE)
 
 ```
 
 ## Association Testing
-<<<<<<< HEAD
-We performed a basic association test on the data using gmmat to correct for the related among individuals and population structure (). We then performed a random forest analysis in R-studio using the ranger R package [@Wright2017]. We used 100,000 trees and used mtry of half the number of snp's. We used a random forest to predict whether the samples would be resident or migratory. Using the BGLR program, we did a genomic prediction using BayesB distribution to estimate the heritability [@Meuwissen2001]. We used 1000 burn- ins and iterations=10,000. The heritability test was done to determine the degree in which phenotypic variation is due to genetic differences among the salmon populations. 
-=======
+
 We performed a basic association test against migratory phenotype using ANGSD using the first 20 Principal Component Analysis components as covariates to correct for the related among individuals and population structure [@Korneliussen2014]. To increase our association resolution, we used used genotype likelihoods instead of called gneotypes to conduct our association test, generated in ANGSD using the same parameters described above. In order to see if any more complex genetic relationships could predict migratory phenotype, we then performed a random forest analysis in R-studio using the ranger R package [@Wright2017]. We used 100,000 trees and used mtry of half the number of called SNPs.
 
 <!-- We also used the BGLR program to perform a genomic prediction using BayesB distribution to estimate the heritability [@Meuwissen2001]. We used 1,000 burn-ins and 10,000 estimation iterations. The heritability test was done to determine the degree in which phenotypic variation is due to genetic differences among the salmon populations.  -->
->>>>>>> e30ebae3cee04d299e8922caa80c9e22b60a9589
 
 
 ## Population Structure and Migratory Relatedness
-In order to detect any underlying population structuring within our stream systems, we used the software package NGSadmix to group samples into *k* clusters for each value of *k* between one and seven [@Skotte693] using the genotype likelihoods mentioned above. To assess variance in clustering within a given *k* value, we ran NGSadmix ten times for each value of *k* and combined the resulting data using CLUMPP [@Jakobsson2007]. We used the pophelper and snpR packages to handle files and produce plots, respectively [@Hemstrom2021; @Francis2017].
+<!-- In order to detect any underlying population structuring within our stream systems, we used the software package NGSadmix to group samples into *k* clusters for each value of *k* between one and seven [@Skotte693] using the genotype likelihoods mentioned above. To assess variance in clustering within a given *k* value, we ran NGSadmix ten times for each value of *k* and combined the resulting data using CLUMPP [@Jakobsson2007]. We used the pophelper and snpR packages to handle files and produce plots, respectively [@Hemstrom2021; @Francis2017]. -->
 
-For comparison, we also conducted a Principle Component Analysis chart (PCA) using the ANGSD-IBS method [@Korneliussen2014]. To look for patterns in relatedness between resident and andromous individuals, we calculated the mean PC1 and PC2 coordinates for each stream, then calculated the distance between each individual sample the mean for the other population. We fit a simple linear regression with the distance to the other population cluster as the response variable and the migratory phenotype as the explanatory variable.
-
-<!-- include that we did a one-way anova to determine if either phenotype was more closely related to the mean of the opposite population -->
+We also conducted a Principle Component Analysis chart (PCA) using the ANGSD-IBS method [@Korneliussen2014]. To look for patterns in relatedness between resident and andromous individuals, we calculated the mean PC1 and PC2 coordinates for each stream, then calculated the distance between each individual sample the mean for the other population. We fit a simple linear regression with the distance to the other population cluster as the response variable and the migratory phenotype as the explanatory variable.
 
 
 ```{r ngsadmix, include=FALSE}
@@ -185,19 +180,20 @@ mean(MASU_data_table[,5], na.rm = TRUE)
 ```
 
 ##Genotyping 
-The number of unfiltered reads are `r sort_read_count`.  After filtering, the number of reads were `r sort_flt_read_count`. We called a total of `r number_snps_after_filtering` SNPs and `r nrow(IBS)` IBS loci. 
-```{r read, include=FALSE}
+
+```{r read, include=FALSE, eval=TRUE}
 library(readr)
 sort_read_count <- read.csv("~/Downloads/sort.read_count.txt", header = FALSE)
-View(sort_read_count)
+# View(sort_read_count)
 sort_read_count <- sum(sort_read_count$V1)
 
 sort_flt_read_count <- read.csv("~/Downloads/sort.flt.read_count.txt", header = FALSE)
-View(sort_flt_read_count)
+# View(sort_flt_read_count)
 sort_flt_read_count <- sum(sort_flt_read_count$V1)
 
 ```
 
+The number of unfiltered reads are `r prettyNum(sort_read_count,big.mark=",",scientific=FALSE)`. After filtering, the number of reads were `r prettyNum(sort_flt_read_count,big.mark=",",scientific=FALSE)`. We called a total of `r prettyNum(number_snps_after_filtering,big.mark=",",scientific=FALSE)` SNPs and `r prettyNum(nrow(IBS),big.mark=",",scientific=FALSE)` IBS loci. 
 <!-- flt read = `r sort_flt_read_count`  -->
 <!-- flt read = 90449126 -->
 <!-- unfiltered reads = `r sort_read_count`  -->
@@ -207,13 +203,13 @@ sort_flt_read_count <- sum(sort_flt_read_count$V1)
 <!-- number of IBS loci = `r nrow(IBS)` -->
 
 ##  Diversity Stats
-The mean $H_{o}$ values are relatively similar between the anadromous and residents individuals and between the CH and TK populations. The $F_{ST}$ values between the two populations and between anadromous and resident individuals were very low, which indicated that there is not much genetic diversity between the two populations and two phenotypes. There are also no private alleles between the two populations, which also indicated low genetic differentiation between the two populations of salmon. 
+The mean $H_{o}$ values are relatively similar between the anadromous and residents individuals and between the CH and TK populations (see Table 1). The $F_{ST}$ values between the two populations and between anadromous and resident individuals were very low, which indicated that there is not much genetic diversity between the two populations and two phenotypes. There are also no private alleles between the two populations, which also indicated low genetic differentiation between the two populations of salmon. 
 
 ## Association
-We did not find any strong associations with migratory life history status at any loci, and the random forest only successfully predicted 25 out of 52 anadromous individuals correctly and 17 out of 44 resident individuals correctly for a total prediction accuracy of 38.6%.
+We did not find any strong associations with migratory life history status at any loci (Figure 1), and the random forest only successfully predicted 25 out of 52 anadromous individuals correctly and 17 out of 44 resident individuals correctly for a total prediction accuracy of 38.6%.
 
 ## Influence of Anadromy on Population Structure
- We found that the anadromous individuals clustered significantly closer to the cluster center for individuals from the other population (one-way ANOVA, p-value = 0.0419). This indicates that the anadromous individuals within one population were more closely related to the individuals in the other population than were residents. 
+ We found that the anadromous individuals clustered significantly closer to the cluster center for individuals from the other population (one-way ANOVA, p-value = 0.0419, see Figure 2). This indicates that the anadromous individuals within one population were more closely related to the individuals in the other population than were residents. 
 <!-- The p value (phenR) is 0.03981775. The p value for the phenotypes is 0.0419.  -->
 
 # Discussion
@@ -221,7 +217,7 @@ We did not find any strong associations with migratory life history status at an
 
 We did not find any significant genetic associations with migratory phenotype (see Figure X). This indicates that in the streams we examined, there may not be any loci in the genome that strongly contribute to migratory life history decisions. It is not therefore surprising that the random forest which we conducted also did not have strong predictive power for anadromy and residency, since it would not be able to accurately group the individuals to their actual life history if there are no genetic elements that contribute to migratory phenotype.
 
-However, our study included samples from only a small region at the center of the masu range. It is possible that if we sampled from other areas, we could uncover loci that influence migratory life history phenotypes under environmental conditions that differ from those in our study systems. This could occur if the effect of migratory genes depends on environmental conditions (GxE). This phenomena is seen in steelhead, where variance in environmental conditions across the species’ range can determine whether life histories are more genetically or environmentally based (Kendall et al., 2014).
+However, our study included samples from only a small region at the center of the masu range. It is possible that if we sampled from other areas, we could uncover loci that influence migratory life history phenotypes under environmental conditions that differ from those in our study systems. This could occur if the effect of migratory genes depends on environmental conditions (GxE). This phenomena is seen in steelhead, where variance in environmental conditions across the species’ range can determine whether life histories are more genetically or environmentally based [@Kendall2015].
 
 ## Patterns of Relatedness Between Anadromous and Resident Individuals
 
@@ -233,7 +229,20 @@ However, this hypothesis could only be true if there are transgenerational envir
 ## Conservation Ramifications
 Our results suggest that, at least in some areas, residency and anadromy within masu salmon are not significantly genetically controlled and that fisheries managers and conservation groups should therefore focus more on the possible environmental correlations with migration (such as temperature and resource availability) when planning conservation efforts targeting masu salmon. Unfortunately, this also means that genetic monitoring for the anadromous potential of a stream is probably often not possible, since it is not possible to predict migratory phenotype from genotypic data. These results may not extrapolate across the entire masu range: further studies with larger sample sizes from more areas could help determine if migratory life history decisions are influenced by the additive or multiplicative effects of genetics and environment or simply a result of purely environmental effects across the full range of the species. 
 
+# References:
 
-<!-- control shift c --> 
-[@Gowen2014; @Ali2016]
-Gowen et al.[-@Gowen2014]
+<div id="refs"></div>
+\newpage
+
+# Figures:
+
+```{r Figure_1_print,echo=FALSE,warning=FALSE,fig.cap="Figure 1: Association across the genome with migratory status showing that no loci were found that were significantly associated with the given traits (anadromy and residency)",fig.width=7, fig.height=4, fig.align='center', fig.cap.style="Image Caption"}
+figure_1$plot
+
+```
+
+
+```{r Figure_2_print,echo=FALSE,warning=FALSE,fig.cap="Figure 2: PCA plot showing the relatedness between anadromous and resident individuals in TK and CH populations",fig.width=7, fig.height=4, fig.align='center', fig.cap.style="Image Caption"}
+p1 
+
+```
